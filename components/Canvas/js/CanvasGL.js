@@ -1,10 +1,15 @@
 // three.jsのコードはここに書く
+import EventBus from '@/utils/event-bus'
 import Controller from './Controller'
 import Shape from './Shape'
 
 export default class CanvasGL {
   constructor(props) {
     this.props = props
+
+    // イベント登録
+    EventBus.$on('THREE_PATH_TRANSITION', this.pathTransition.bind(this))
+
     this.init()
   }
 
@@ -20,6 +25,14 @@ export default class CanvasGL {
 
     // フレーム描画開始
     this.loop()
+  }
+
+  pathTransition(newPath) {
+    switch (newPath) {
+      case 'index':
+      case 'about':
+      default:
+    }
   }
 
   resize() {

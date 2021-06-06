@@ -9,6 +9,7 @@
 
 <script>
 import Canvas from '@/components/Canvas'
+import EventBus from '@/utils/event-bus'
 
 export default {
   components: {
@@ -17,6 +18,7 @@ export default {
   watch: {
     '$route.name'(_new, _old) {
       // _new: 遷移先パス, _old: 遷移元パス
+      EventBus.$emit('THREE_PATH_TRANSITION', _new)
     },
   },
 }
