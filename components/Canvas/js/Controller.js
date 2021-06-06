@@ -21,23 +21,26 @@ class Controller {
 
     // 3次元カメラを作成
     this.camera = new THREE.PerspectiveCamera(
-      45, // 画角
+      85, // 画角
       this.size.windowWidth / this.size.windowHeight, // アスペクト比
       0.1, // 最短撮影距離
       1000 // 最長撮影距離
     )
-    this.camera.position.set(0, 10, -10)
+    this.camera.position.set(0, 0, -10)
     this.camera.lookAt(this.scene.position)
 
     // レンダラーを作成
     this.renderer = new THREE.WebGL1Renderer({
       canvas: $canvas,
-      //   alpha: true,
+      alpha: true,
     })
 
     // レンダラーのサイズを調整
     this.renderer.setPixelRatio(window.devicePixelRatio)
     this.renderer.setSize(this.size.windowWidth, this.size.windowHeight)
+
+    // レンダラーのシャドウを有効化
+    this.renderer.shadowMap.enabled = true
   }
 
   setSize() {

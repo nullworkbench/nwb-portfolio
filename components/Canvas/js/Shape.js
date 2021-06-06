@@ -7,28 +7,98 @@ export default class Shape {
     this.init()
   }
 
+  // 使用するShape
   init() {
-    this.addSphere()
+    this.initMaterial()
+    this.addIcosahedron()
+
+    // this.addAmbientLight()
+    // this.addDirectionalLight(0x74ebd5, 8, 8, -4 * 4) // ターコイズ
+    // this.addDirectionalLight(0xacb6e5, -2, -40, -8) // ブルー
+    // this.addDirectionalLight(0xfcd29f, -40, 40, -4)
   }
 
-  addSphere() {
-    // Shapeの形
-    const geometry = new THREE.SphereGeometry(3, 32, 32) // 球体（半径, 幅区切り数, 高さ区切
+  // 環境光
+  addAmbientLight() {
+    const ambientLight = new THREE.AmbientLight(0x404040, 1) // （光の色, 光の強さ）
+    Controller.scene.add(ambientLight)
+  }
 
-    // Shapeのマテリアル
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
-      wireframe: true,
+  // 指向性ライト
+  addDirectionalLight(color, x, y, z) {
+    const light = new THREE.PointLight(color, 1) // （光の色, 光の強さ）
+    light.position.set(x, y, z)
+    light.castShadow = true // シャドウを提供する
+    light.shadow.mapSize.width = 2048 // シャドウをきめ細かく
+    light.shadow.mapSize.height = 2048
+    Controller.scene.add(light)
+  }
+
+  // material定義
+  initMaterial() {
+    this.material = new THREE.ShaderMaterial({
+      uniforms: {
+        color1: {
+          value: new THREE.Color(0x74ebd5),
+        },
+        color2: {
+          value: new THREE.Color(0xacb6e5),
+        },
+        color3: {
+          value: new THREE.Color(0xfcd29f),
+        },
+      },
+      vertexShader: `
+    varying vec2 vUv;
+
+    void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+    }
+    `,
+      fragmentShader: `
+    uniform vec3 color1;
+    uniform vec3 color2;
+
+    varying vec2 vUv;
+
+    void main() {
+        gl_FragColor = vec4(mix(color1, color2, vUv.y), 1.0);
+    }
+    `,
+      //   wireframe: true,
     })
-
-    // ShapeをSceneへ追加
-    this.sphere = new THREE.Mesh(geometry, material)
-    this.sphere.castShadow = true
-    Controller.scene.add(this.sphere)
   }
+
+  // geometryから枠線を生成しlineを返す
+  appendEdgeLine(geometry) {
+    const edges = new THREE.EdgesGeometry(geometry)
+    const line = new THREE.LineSegments(
+      edges,
+      new THREE.LineBasicMaterial({ color: 0xffffff })
+    )
+    return line
+  }
+
+  // 球体
+  addIcosahedron() {
+    const geometry = new THREE.IcosahedronGeometry(4, 3) // 半径, 面の細かさ
+
+    this.icosahedron = new THREE.Mesh(geometry, this.material)
+    this.icosahedronLine = this.appendEdgeLine(geometry)
+
+    // this.icosahedron.rotation.x += 0.5
+    // this.icosahedronLine.rotation.x += 0.5
+
+    Controller.scene.add(this.icosahedron)
+    Controller.scene.add(this.icosahedronLine)
+  }
+
+  // 八面体
 
   // 毎フレーム更新したいこと
   update() {
-    this.sphere.rotation.y -= 0.01
+    this.icosahedron.rotation.y -= 0.005
+    this.icosahedronLine.rotation.y -= 0.005
   }
 }
