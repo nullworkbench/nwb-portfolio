@@ -33,6 +33,7 @@ class Controller {
     this.renderer = new THREE.WebGL1Renderer({
       canvas: $canvas,
       alpha: true,
+      antialias: true,
     })
 
     // レンダラーのサイズを調整
