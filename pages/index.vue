@@ -25,7 +25,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 .container {
   position: relative;
   min-height: 100vh;
