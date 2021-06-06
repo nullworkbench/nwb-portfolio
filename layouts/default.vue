@@ -1,8 +1,21 @@
 <template>
-  <div>
+  <div id="container">
+    <div id="canvas">
+      <Canvas />
+    </div>
     <Nuxt />
   </div>
 </template>
+
+<script>
+import Canvas from '@/components/Canvas'
+
+export default {
+  components: {
+    Canvas,
+  },
+}
+</script>
 
 <style>
 html {
@@ -24,5 +37,17 @@ html {
 *::after {
   box-sizing: border-box;
   margin: 0;
+}
+
+#container {
+  position: relative;
+}
+
+#canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 </style>

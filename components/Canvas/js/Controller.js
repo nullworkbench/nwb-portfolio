@@ -20,13 +20,17 @@ class Controller {
     this.scene = new THREE.Scene()
 
     // 3次元カメラを作成
+    const fov = 85
+    const fovRad = (fov / 2) * (Math.PI / 180)
+    const dist = this.size.windowHeight / 2 / Math.tan(fovRad) // ウィンドウピッタリのカメラ距離
+
     this.camera = new THREE.PerspectiveCamera(
-      85, // 画角
+      fov, // 画角
       this.size.windowWidth / this.size.windowHeight, // アスペクト比
-      0.1, // 最短撮影距離
-      1000 // 最長撮影距離
+      1, // 最短撮影距離
+      dist * 2 // 最長撮影距離
     )
-    this.camera.position.set(0, 0, -10)
+    this.camera.position.set(0, 0, dist)
     this.camera.lookAt(this.scene.position)
 
     // レンダラーを作成

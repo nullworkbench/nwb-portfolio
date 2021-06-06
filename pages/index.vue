@@ -1,8 +1,5 @@
 <template>
   <div class="container">
-    <div id="canvas">
-      <Canvas />
-    </div>
     <nav id="sideMenu">
       <ul>
         <li>About</li>
@@ -16,27 +13,13 @@
 </template>
 
 <script>
-import Canvas from '@/components/Canvas'
-
-export default {
-  components: {
-    Canvas,
-  },
-}
+export default {}
 </script>
 
 <style lang="scss">
 .container {
   position: relative;
   min-height: 100vh;
-}
-
-#canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
 }
 
 #sideMenu {
@@ -53,5 +36,12 @@ export default {
     BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 200;
   font-size: 2rem;
+
+  ul {
+    list-style: none;
+  }
+  li {
+    margin-bottom: 2rem;
+  }
 }
 </style>
