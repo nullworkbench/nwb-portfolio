@@ -4,6 +4,7 @@ import Controller from './Controller'
 export default class Shape {
   constructor() {
     this.segments = 80
+    this.rotationSpeed = 0.001
     this.init()
   }
 
@@ -98,7 +99,7 @@ export default class Shape {
 
   // 毎フレーム更新したいこと
   update() {
-    this.icosahedron.rotation.y -= 0.005
-    this.icosahedronLine.rotation.y -= 0.005
+    this.icosahedron.rotation.y -= this.rotationSpeed
+    this.icosahedronLine.rotation.y -= this.rotationSpeed
   }
 }
