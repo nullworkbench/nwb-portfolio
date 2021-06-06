@@ -2,7 +2,7 @@
   <div class="container">
     <nav id="sideMenu">
       <ul>
-        <li>About</li>
+        <li><nuxt-link to="/about">About</nuxt-link></li>
         <li>Works</li>
         <li>Library</li>
         <li>Blog</li>

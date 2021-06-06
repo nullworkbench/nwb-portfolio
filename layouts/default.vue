@@ -14,6 +14,11 @@ export default {
   components: {
     Canvas,
   },
+  watch: {
+    '$route.name'(_new, _old) {
+      // _new: 遷移先パス, _old: 遷移元パス
+    },
+  },
 }
 </script>
 
