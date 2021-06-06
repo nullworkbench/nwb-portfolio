@@ -3,7 +3,7 @@
     <div id="canvas">
       <Canvas />
     </div>
-    <nav id="menu">
+    <nav id="sideMenu">
       <ul>
         <li>About</li>
         <li>Works</li>
@@ -37,5 +37,21 @@ export default {
   left: 0;
   width: 100vw;
   height: 100vh;
+}
+
+#sideMenu {
+  /* position */
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 35%;
+  height: max-content;
+  transform: translateY(-50%);
+
+  /* Font */
+  font-family: 'Josefin Sans', 'Source Sans Pro', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 200;
+  font-size: 2rem;
 }
 </style>
