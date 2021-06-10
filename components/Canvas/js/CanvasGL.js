@@ -28,11 +28,7 @@ export default class CanvasGL {
   }
 
   pathTransition(newPath) {
-    switch (newPath) {
-      case 'index':
-      case 'about':
-      default:
-    }
+    this.shape.shapeTransition(newPath)
   }
 
   resize() {

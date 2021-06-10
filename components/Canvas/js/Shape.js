@@ -17,6 +17,8 @@ export default class Shape {
     // this.addDirectionalLight(0x74ebd5, 8, 8, -4 * 4) // ターコイズ
     // this.addDirectionalLight(0xacb6e5, -2, -40, -8) // ブルー
     // this.addDirectionalLight(0xfcd29f, -40, 40, -4)
+
+    this.mixer = new THREE.AnimationMixer(this.icosahedron)
   }
 
   // 環境光
@@ -85,24 +87,59 @@ export default class Shape {
   addIcosahedron() {
     const geometry = new THREE.IcosahedronGeometry(
       Controller.size.windowWidth * 0.15,
-      3
+      2
     ) // 半径, 面の細かさ
 
     this.icosahedron = new THREE.Mesh(geometry, this.material)
     this.icosahedronLine = this.appendEdgeLine(geometry)
-
-    // this.icosahedron.rotation.x += 0.5
-    // this.icosahedronLine.rotation.x += 0.5
+    this.icosahedronLine.scale.set(1.005, 1.005, 1.005) // ちょっとだけ大きくして枠線を際立たせる
 
     Controller.scene.add(this.icosahedron)
-    Controller.scene.add(this.icosahedronLine)
+    this.icosahedron.add(this.icosahedronLine)
+
+    // this.icosahedron.rotateOnAxis.x += 60
   }
 
   // 八面体
 
+  // ページ遷移でShapeの動きを変える
+  shapeTransition(path) {
+    const positionKeyframeTrackJSON = {
+      name: '.position', // .parseTrackName
+      type: 'vector', // nameに設定したプロパティの型
+      times: [0], // 時間の区切り
+      values: [0, 0, 0], // 0秒の時に[0,0,0], 1秒の時に[2,1,15]
+      interpolation: THREE.InterpolateSmooth, // アニメーションの動き方
+    }
+
+    switch (path) {
+      case 'about':
+        positionKeyframeTrackJSON.name = '.position[x]'
+        positionKeyframeTrackJSON.type = 'number'
+        positionKeyframeTrackJSON.times = [0, 0.8]
+        positionKeyframeTrackJSON.values = [0, 100]
+        break
+      default:
+        break
+    }
+
+    const clipJSON = {
+      tracks: [positionKeyframeTrackJSON],
+    }
+
+    const clip = THREE.AnimationClip.parse(clipJSON)
+
+    const action = this.mixer.clipAction(clip)
+
+    action.clampWhenFinished = true // アニメーションの最後のフレームで一時停止する
+    action.setLoop(THREE.LoopRepeat, 1) // アニメーションの回数
+    action.play() // アニメーション開始
+  }
+
   // 毎フレーム更新したいこと
   update() {
+    this.mixer.update(0.01)
+    this.icosahedron.rotation.x += this.rotationSpeed / 4
     this.icosahedron.rotation.y -= this.rotationSpeed
-    this.icosahedronLine.rotation.y -= this.rotationSpeed
   }
 }
