@@ -24,12 +24,23 @@ class Controller {
     const fovRad = (fov / 2) * (Math.PI / 180)
     const dist = this.size.windowHeight / 2 / Math.tan(fovRad) // ウィンドウピッタリのカメラ距離
 
-    this.camera = new THREE.PerspectiveCamera(
-      fov, // 画角
-      this.size.windowWidth / this.size.windowHeight, // アスペクト比
-      1, // 最短撮影距離
-      dist * 2 // 最長撮影距離
+    // this.camera = new THREE.PerspectiveCamera(
+    //   fov, // 画角
+    //   this.size.windowWidth / this.size.windowHeight, // アスペクト比
+    //   1, // 最短撮影距離
+    //   dist * 2 // 最長撮影距離
+    // )
+
+    // パースが効かないカメラを作成
+    this.camera = new THREE.OrthographicCamera(
+      this.size.windowWidth / -2,
+      this.size.windowWidth / 2,
+      this.size.windowHeight / 2,
+      this.size.windowHeight / -2,
+      -100,
+      dist * 2
     )
+
     this.camera.position.set(0, 0, dist)
     this.camera.lookAt(this.scene.position)
 

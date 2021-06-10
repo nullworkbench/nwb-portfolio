@@ -21,6 +21,10 @@ export default {
       EventBus.$emit('THREE_PATH_TRANSITION', _new)
     },
   },
+  // moutedを書くと、遷移時にthreejsのtransitionがしなくなる
+  // mounted() {
+  //   EventBus.$emit('THREE_PATH_TRANSITION', this.$route.name)
+  // },
 }
 </script>
 
@@ -37,6 +41,16 @@ html {
   box-sizing: border-box;
 
   background: #edf2f5;
+}
+
+/* ページ遷移アニメーション */
+.page-enter,
+.page-leave-active {
+  opacity: 0;
+}
+.page-enter-active,
+.page-leave-active {
+  transition: opacity 0.5s;
 }
 
 *,

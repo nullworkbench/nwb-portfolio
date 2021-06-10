@@ -100,35 +100,51 @@ export default class Shape {
     // this.icosahedron.rotateOnAxis.x += 60
   }
 
-  // 八面体
-
   // ページ遷移でShapeの動きを変える
   shapeTransition(path) {
-    const positionKeyframeTrackJSON = {
-      name: '.position', // .parseTrackName
-      type: 'vector', // nameに設定したプロパティの型
-      times: [0], // 時間の区切り
-      values: [0, 0, 0], // 0秒の時に[0,0,0], 1秒の時に[2,1,15]
-      interpolation: THREE.InterpolateSmooth, // アニメーションの動き方
+    const clipJSON = {
+      tracks: [],
     }
 
     switch (path) {
-      case 'about':
-        positionKeyframeTrackJSON.name = '.position[x]'
-        positionKeyframeTrackJSON.type = 'number'
-        positionKeyframeTrackJSON.times = [0, 0.8]
-        positionKeyframeTrackJSON.values = [0, 100]
+      case 'about': {
+        // 左端に移動するアニメーション
+        const positionKeyframeTrackJSON = {
+          name: '.position[x]', // .parseTrackName
+          type: 'number', // nameに設定したプロパティの型
+          times: [0, 0.8], // 時間の区切り
+          values: [0, -Controller.size.windowWidth / 2], // 0秒の時に[0,0,0], 1秒の時に[2,1,15]
+        }
+        // 拡大するアニメーション
+        const scaleKeyframeTrackJSON = {
+          name: '.scale', // .parseTrackName
+          type: 'vector', // nameに設定したプロパティの型
+          times: [0, 0.8], // 時間の区切り
+          values: [
+            this.icosahedron.scale.x,
+            this.icosahedron.scale.y,
+            this.icosahedron.scale.z,
+            2,
+            2,
+            2,
+          ], // 0秒の時に[0,0,0], 1秒の時に[2,2,2]。元のscaleから2倍の大きさに
+        }
+
+        // tracksに追加
+        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
         break
+      }
       default:
         break
     }
 
-    const clipJSON = {
-      tracks: [positionKeyframeTrackJSON],
+    // アニメーションの動き方を指定
+    for (const track of clipJSON.tracks) {
+      track.interpolation = THREE.InterpolateSmooth
     }
 
+    // ミキサーに設定
     const clip = THREE.AnimationClip.parse(clipJSON)
-
     const action = this.mixer.clipAction(clip)
 
     action.clampWhenFinished = true // アニメーションの最後のフレームで一時停止する
