@@ -62,7 +62,6 @@ html {
 }
 
 #container {
-  position: relative;
   min-height: 100vh;
 }
 
