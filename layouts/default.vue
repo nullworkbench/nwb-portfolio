@@ -94,7 +94,7 @@ h2 {
   /* Font */
   font-family: 'Josefin Sans', 'Source Sans Pro', -apple-system,
     BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-weight: 200;
+  font-weight: 300;
   font-size: 3rem;
 }
 
