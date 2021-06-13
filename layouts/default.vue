@@ -66,6 +66,7 @@ html {
 
 #canvas {
   position: absolute;
+  z-index: -90;
   top: 0;
   left: 0;
   width: 100vw;
