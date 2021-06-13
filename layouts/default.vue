@@ -58,6 +58,7 @@ html {
 *::after {
   box-sizing: border-box;
   margin: 0;
+  padding: 0;
 }
 
 #container {
@@ -78,6 +79,15 @@ html {
 .container {
   position: relative;
   min-height: 100vh;
+}
+
+/* ----- 共通CSS ----- */
+p {
+  margin-bottom: 0.5rem;
+}
+ul {
+  margin: 0.8rem 0;
+  list-style-type: none;
 }
 
 /* ページタイトル */
