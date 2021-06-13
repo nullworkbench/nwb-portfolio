@@ -88,4 +88,9 @@ h2 {
   font-weight: 200;
   font-size: 3rem;
 }
+
+/* 共通パーツ */
+.emoji {
+  padding-right: 0.6rem;
+}
 </style>
