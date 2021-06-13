@@ -16,12 +16,7 @@
 export default {}
 </script>
 
-<style lang="scss">
-.container {
-  position: relative;
-  min-height: 100vh;
-}
-
+<style lang="scss" scoped>
 #sideMenu {
   /* position */
   position: absolute;

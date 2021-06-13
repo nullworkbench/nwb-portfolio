@@ -62,6 +62,7 @@ html {
 
 #container {
   position: relative;
+  min-height: 100vh;
 }
 
 #canvas {
@@ -71,5 +72,20 @@ html {
   left: 0;
   width: 100vw;
   height: 100vh;
+}
+
+/* 各ページのルートエレメント */
+.container {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ページタイトル */
+h2 {
+  /* Font */
+  font-family: 'Josefin Sans', 'Source Sans Pro', -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 200;
+  font-size: 3rem;
 }
 </style>
