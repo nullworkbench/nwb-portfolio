@@ -33,9 +33,24 @@
             <p>現在に至る。</p>
           </div>
         </section>
-        <section>
+
+        <!-- Skills -->
+        <section id="sectionSkills">
           <h3>Skills</h3>
-          <ul></ul>
+          <ul>
+            <li>
+              <h4>Frontend（ HTML / CSS / JavaScript / Nuxt.js ）</h4>
+              <p>4 years experience since 2017</p>
+              <div class="skillDots">
+                <SkillDots :num-of-dots="4" />
+                <!-- <skill-dots /> -->
+              </div>
+            </li>
+            <li>Camera（ Photograph / Video shooting / Nikon / SONY ）</li>
+            <li>
+              Adobe（ Illustrator / Photoshop / AfterEffects / Premiere ）
+            </li>
+          </ul>
         </section>
       </main>
     </div>
@@ -43,13 +58,18 @@
 </template>
 
 <script>
-export default {}
+import SkillDots from '@/components/Parts/SkillDots.vue'
+export default {
+  components: {
+    SkillDots,
+  },
+}
 </script>
 
 <style lang="scss" scoped>
 h2 {
   // position
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 12%;
   transform: translateY(-50%);
@@ -112,6 +132,33 @@ h3 {
         color: #9a9a9a;
       }
     }
+  }
+}
+
+// Skills
+#sectionSkills {
+  font-family: 'Comfortaa', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 200;
+  font-size: 1rem;
+
+  li {
+    margin-bottom: 2rem;
+  }
+  h4 {
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #474747;
+    margin-bottom: 0.8rem;
+  }
+
+  .skillDots {
+    // margin-left: 1rem;
   }
 }
 </style>
