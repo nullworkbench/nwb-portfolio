@@ -134,6 +134,30 @@ export default class Shape {
         clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
         break
       }
+      case 'blog': {
+        const positionKeyframeTrackJSON = {
+          name: '.position[y]',
+          type: 'number',
+          times: [0, 0.8],
+          values: [0, Controller.size.windowHeight / 1.1],
+        }
+        const scaleKeyframeTrackJSON = {
+          name: '.scale',
+          type: 'vector',
+          times: [0, 0.8],
+          values: [
+            this.icosahedron.scale.x,
+            this.icosahedron.scale.y,
+            this.icosahedron.scale.z,
+            2,
+            2,
+            2,
+          ],
+        }
+
+        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
+        break
+      }
       default:
         break
     }
