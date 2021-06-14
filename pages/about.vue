@@ -28,9 +28,8 @@
               高校生の時に友人のアルバイト先からWebサイト制作を依頼され、初めて仕事として受注、納品。
             </p>
             <p>
-              その後は自分でWebサイトをお持ちでない商店へ営業するなどし高校卒業時には３顧客を獲得。Webコーディングと同じく趣味としていたカメラを扱う技術を組み合わせ、写真、動画撮影も事業に追加。
+              その後はWebサイトをお持ちでない商店へ営業をするなどし高校卒業時点で３顧客を獲得。Webコーディングと同じく趣味としていたカメラを扱う技術を組み合わせ、写真、動画撮影も事業に追加。
             </p>
-            <p>現在に至る。</p>
           </div>
         </section>
 
@@ -120,7 +119,7 @@ section {
 h3 {
   font-family: 'Comfortaa', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
     'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 2.4rem;
+  font-size: 1.8rem;
   letter-spacing: 0.15rem;
   font-weight: 200;
   position: relative;
