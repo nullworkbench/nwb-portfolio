@@ -38,17 +38,39 @@
         <section id="sectionSkills">
           <h3>Skills</h3>
           <ul>
+            <!-- Frontend -->
             <li>
-              <h4>Frontend（ HTML / CSS / JavaScript / Nuxt.js ）</h4>
-              <p>4 years experience since 2017</p>
-              <div class="skillDots">
-                <SkillDots :num-of-dots="4" />
-                <!-- <skill-dots /> -->
-              </div>
+              <Skill
+                :data="[
+                  'Frontend',
+                  ['HTML', 'CSS', 'JavaScript', 'Nuxt.js'],
+                  2017,
+                ]"
+              />
             </li>
-            <li>Camera（ Photograph / Video shooting / Nikon / SONY ）</li>
+            <!-- Native App -->
             <li>
-              Adobe（ Illustrator / Photoshop / AfterEffects / Premiere ）
+              <Skill :data="['Native App', ['Swift'], 2020]" />
+            </li>
+            <!-- Camera -->
+            <li>
+              <Skill
+                :data="[
+                  'Camera',
+                  ['Photograph', 'Video shooting', 'Nikon', 'SONY'],
+                  2016,
+                ]"
+              />
+            </li>
+            <!-- Adobe -->
+            <li>
+              <Skill
+                :data="[
+                  'Adobe',
+                  ['Illustrator', 'Photoshop', 'AfterEffects', 'Premiere'],
+                  2017,
+                ]"
+              />
             </li>
           </ul>
         </section>
@@ -58,10 +80,15 @@
 </template>
 
 <script>
-import SkillDots from '@/components/Parts/SkillDots.vue'
+import Skill from '~/components/Parts/About/Skill.vue'
 export default {
   components: {
-    SkillDots,
+    Skill,
+  },
+  data() {
+    return {
+      now: new Date(),
+    }
   },
 }
 </script>
@@ -143,22 +170,7 @@ h3 {
   font-size: 1rem;
 
   li {
-    margin-bottom: 2rem;
-  }
-  h4 {
-    font-size: 1.5rem;
-    font-weight: 200;
-    margin-bottom: 0.6rem;
-  }
-
-  p {
-    font-size: 1.2rem;
-    color: #474747;
-    margin-bottom: 0.8rem;
-  }
-
-  .skillDots {
-    // margin-left: 1rem;
+    margin-bottom: 3rem;
   }
 }
 </style>
