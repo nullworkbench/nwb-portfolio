@@ -4,10 +4,10 @@
     <div class="mainWrapper">
       <main>
         <section id="sectionQiita">
-          <div v-if="$fetchState.pending">Fetching Qiita Posts...</div>
-          <div v-else-if="$fetchState.error">
+          <p v-if="$fetchState.pending">Fetching Qiita Posts...</p>
+          <p v-else-if="$fetchState.error">
             An Error Occured When Fetching Qiita Posts.
-          </div>
+          </p>
           <div v-else>
             <div v-for="(post, idx) in qiitaPosts" :key="idx" class="qiitaPost">
               <h3>{{ post['title'] }}</h3>
@@ -77,6 +77,9 @@ main {
 
 // Qiita
 #sectionQiita {
+  > p {
+    text-align: center;
+  }
   .qiitaPost {
     position: relative;
     background: #f9f9f9;
