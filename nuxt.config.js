@@ -45,10 +45,21 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    [
+      '@nuxtjs/dotenv',
+      {
+        filename: '.env',
+      },
+    ],
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
+
+  // DotEnv
+  env: {
+    QIITA_API_TOKEN: process.env.QIITA_API_TOKEN,
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
