@@ -21,10 +21,10 @@ export default {
       EventBus.$emit('THREE_PATH_TRANSITION', _new)
     },
   },
-  // moutedを書くと、遷移時にthreejsのtransitionがしなくなる
-  // mounted() {
-  //   EventBus.$emit('THREE_PATH_TRANSITION', this.$route.name)
-  // },
+  mounted() {
+    // index以外に直接アクセスした場合に球体の位置を設定
+    EventBus.$emit('THREE_PATH_TRANSITION', this.$route.name)
+  },
 }
 </script>
 
