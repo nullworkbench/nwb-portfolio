@@ -4,11 +4,11 @@
       <h1><nuxt-link to="/">nullworkbench</nuxt-link></h1>
 
       <ul>
-        <li><nuxt-link to="/about">About</nuxt-link></li>
-        <li><nuxt-link to="/works">Works</nuxt-link></li>
-        <li><nuxt-link to="/library">Library</nuxt-link></li>
-        <li><nuxt-link to="/blog">Blog</nuxt-link></li>
-        <li><nuxt-link to="/contact">Contact</nuxt-link></li>
+        <li><nuxt-link ref="about" to="/about">About</nuxt-link></li>
+        <li><nuxt-link ref="works" to="/works">Works</nuxt-link></li>
+        <li><nuxt-link ref="library" to="/library">Library</nuxt-link></li>
+        <li><nuxt-link ref="blog" to="/blog">Blog</nuxt-link></li>
+        <li><nuxt-link ref="contact" to="/contact">Contact</nuxt-link></li>
       </ul>
     </div>
   </header>
@@ -54,6 +54,11 @@ li {
     &:hover {
       padding: 0 1rem;
     }
+  }
+
+  // activeなリンクのスタイルを変更
+  .nuxt-link-active {
+    font-weight: 600;
   }
 }
 </style>

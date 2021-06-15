@@ -1,6 +1,6 @@
 <template>
   <div id="container">
-    <GlobalHeader />
+    <GlobalHeader ref="globalHeader" />
     <div id="canvas">
       <Canvas />
     </div>
@@ -21,6 +21,7 @@ export default {
   watch: {
     '$route.name'(_new, _old) {
       // _new: 遷移先パス, _old: 遷移元パス
+      // 球体のアニメーションを実行
       EventBus.$emit('THREE_PATH_TRANSITION', _new)
     },
   },
