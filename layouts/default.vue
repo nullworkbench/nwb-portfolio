@@ -1,5 +1,6 @@
 <template>
   <div id="container">
+    <GlobalHeader />
     <div id="canvas">
       <Canvas />
     </div>
@@ -8,11 +9,13 @@
 </template>
 
 <script>
+import GlobalHeader from '@/components/GlobalHeader.vue'
 import Canvas from '@/components/Canvas'
 import EventBus from '@/utils/event-bus'
 
 export default {
   components: {
+    GlobalHeader,
     Canvas,
   },
   watch: {
@@ -81,6 +84,10 @@ html {
 }
 
 /* ----- 共通CSS ----- */
+a {
+  text-decoration: none;
+  color: #000;
+}
 p {
   margin-bottom: 0.5rem;
 }
