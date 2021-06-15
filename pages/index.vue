@@ -3,7 +3,7 @@
     <nav id="sideMenu">
       <ul>
         <li><nuxt-link to="/about">About</nuxt-link></li>
-        <li>Works</li>
+        <li><nuxt-link to="/works">Works</nuxt-link></li>
         <li>Library</li>
         <li><nuxt-link to="/blog">Blog</nuxt-link></li>
         <li>Contact</li>

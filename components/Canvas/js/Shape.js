@@ -165,12 +165,46 @@ export default class Shape {
         clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
         break
       }
+      case 'works': {
+        const positionKeyframeTrackJSON = {
+          name: '.position',
+          type: 'vector',
+          times: [0, 0.8],
+          values: [
+            this.icosahedron.position.x,
+            this.icosahedron.position.y,
+            this.icosahedron.position.z,
+            0,
+            0,
+            0,
+          ],
+        }
+        const scaleKeyframeTrackJSON = {
+          name: '.scale',
+          type: 'vector',
+          times: [0, 0.8],
+          values: [
+            this.icosahedron.scale.x,
+            this.icosahedron.scale.y,
+            this.icosahedron.scale.z,
+            5,
+            5,
+            5,
+          ],
+        }
+
+        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
+        break
+      }
       case 'blog': {
         const positionKeyframeTrackJSON = {
           name: '.position[y]',
           type: 'number',
           times: [0, 0.8],
-          values: [0, Controller.size.windowHeight / 1.1],
+          values: [
+            this.icosahedron.position.y,
+            Controller.size.windowHeight / 1.1,
+          ],
         }
         const scaleKeyframeTrackJSON = {
           name: '.scale',

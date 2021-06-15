@@ -37,7 +37,7 @@ class Controller {
       this.size.windowWidth / 2,
       this.size.windowHeight / 2,
       this.size.windowHeight / -2,
-      -100,
+      -1000,
       dist * 2
     )
 
