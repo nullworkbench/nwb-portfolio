@@ -107,6 +107,37 @@ export default class Shape {
     }
 
     switch (path) {
+      case 'index': {
+        const positionKeyframeTrackJSON = {
+          name: '.position',
+          type: 'vector',
+          times: [0, 0.8],
+          values: [
+            this.icosahedron.position.x,
+            this.icosahedron.position.y,
+            this.icosahedron.position.z,
+            0,
+            0,
+            0,
+          ],
+        }
+        const scaleKeyframeTrackJSON = {
+          name: '.scale',
+          type: 'vector',
+          times: [0, 0.8],
+          values: [
+            this.icosahedron.scale.x,
+            this.icosahedron.scale.y,
+            this.icosahedron.scale.z,
+            1,
+            1,
+            1,
+          ],
+        }
+
+        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
+        break
+      }
       case 'about': {
         // 左端に移動するアニメーション
         const positionKeyframeTrackJSON = {
@@ -168,6 +199,7 @@ export default class Shape {
     }
 
     // ミキサーに設定
+    this.mixer.uncacheAction() // 既存のアニメーションを削除
     const clip = THREE.AnimationClip.parse(clipJSON)
     const action = this.mixer.clipAction(clip)
 
