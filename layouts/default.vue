@@ -96,6 +96,12 @@ ul {
   margin: 0.8rem 0;
   list-style-type: none;
 }
+button {
+  appearance: none;
+  border: none;
+  outline: none;
+  font: inherit;
+}
 
 /* ページタイトル */
 h2 {

@@ -65,7 +65,7 @@
             <li>
               <Skill
                 :data="[
-                  'Adobe',
+                  'Graphic',
                   ['Illustrator', 'Photoshop', 'AfterEffects', 'Premiere'],
                   2017,
                 ]"

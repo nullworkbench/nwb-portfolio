@@ -12,7 +12,7 @@
     </div>
     <div class="toWorksLinkWrap">
       <nuxt-link
-        :to="'/works?category=' + data[0].toLowerCase().replace(/\s+/g, '')"
+        :to="'/works/?category=' + data[0].toLowerCase().replace(/\s+/g, '')"
         >My {{ data[0] }} Works</nuxt-link
       >
       <div></div>
