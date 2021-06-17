@@ -33,6 +33,11 @@ export default {
 </script>
 
 <style>
+/* CSS変数 */
+:root {
+  --theme-color: #6fc5c6;
+}
+
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
     Roboto, 'Helvetica Neue', Arial, sans-serif;
