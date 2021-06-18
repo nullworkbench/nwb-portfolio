@@ -88,6 +88,7 @@ main {
   margin-bottom: 4rem;
 
   .categoryBtn {
+    cursor: pointer;
     width: max-content;
     background: #f9f9f99a;
     padding: 0.5rem 1.5rem;
