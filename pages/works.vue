@@ -18,9 +18,12 @@
         <div id="stage">
           <div v-for="(work, idx) in works" :key="idx" class="item">
             <img :src="'/works/' + work[3]" />
-            <h3>{{ work[0] }}</h3>
-            <p>{{ work[1] }}</p>
-            <p>{{ work[2] }}</p>
+
+            <div class="hover">
+              <h3>{{ work[0] }}</h3>
+              <p>{{ work[1] }}</p>
+              <p>{{ work[2] }}</p>
+            </div>
           </div>
         </div>
       </main>
@@ -36,7 +39,7 @@ export default {
       works: [
         ['タイトル', '日付', '説明文', '画像リンク（/works以下）'],
         [
-          'iPhoneアプリ「星に願いを。」',
+          'iPhoneアプリ\n「星に願いを。」',
           '2021/04/12',
           '夜空を見上げ、リアルタイムに願い事を共有できるアプリ。',
           'WishUponAStar.png',
@@ -103,13 +106,65 @@ main {
 
 #stage {
   .item {
+    cursor: pointer;
+    position: relative;
     width: 30%;
+    padding-bottom: 30%;
     background: #f9f9f9;
+    border-radius: 50%;
+    overflow: hidden;
+
+    // 丸っこく見せるための内側のshadow
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 0 3rem #e6e6e6 inset;
+    }
 
     img {
+      position: absolute;
+      top: 0;
+      left: 0;
       display: block;
-      width: 90%;
-      border-radius: 1rem;
+      width: 100%;
+    }
+
+    .hover {
+      // position
+      position: absolute;
+      z-index: 11;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 4.5rem 2rem;
+      // font
+      color: #fff;
+      text-align: center;
+      // animation
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.4s, visibility 0.4s;
+
+      h3 {
+        white-space: pre-wrap;
+        font-size: 1.3rem;
+      }
+      p {
+        margin-top: 1rem;
+      }
+    }
+
+    &:hover .hover {
+      visibility: visible;
+      opacity: 1;
     }
   }
 }
