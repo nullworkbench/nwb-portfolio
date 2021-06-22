@@ -1,7 +1,12 @@
 <template>
   <header>
     <div>
-      <h1><nuxt-link to="/">nullworkbench</nuxt-link></h1>
+      <h1>
+        <nuxt-link to="/">
+          <img src="/nwb_icon.svg" alt="nullworkbenchのロゴ" />
+          <span>nullworkbench</span>
+        </nuxt-link>
+      </h1>
 
       <ul>
         <li><nuxt-link ref="about" to="/about">About</nuxt-link></li>
@@ -33,8 +38,22 @@ header {
 }
 
 h1 {
+  max-width: 13rem;
   font-size: 1.5rem;
   font-weight: 200;
+
+  a {
+    display: flex;
+  }
+  img {
+    display: block;
+    width: 1.2rem;
+    margin-right: 0.5rem;
+  }
+  span {
+    display: block;
+    padding-top: 0.3rem;
+  }
 }
 
 ul {
@@ -49,7 +68,7 @@ li {
 
   a {
     display: block;
-    line-height: 2.7rem;
+    line-height: 3rem;
     transition: padding 0.4s;
     &:hover {
       padding: 0 1rem;
