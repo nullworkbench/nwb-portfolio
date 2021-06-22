@@ -2,7 +2,7 @@
   <div class="container">
     <h2>Works</h2>
     <div class="mainWrapper">
-      <main>
+      <main ref="main">
         <!-- <div id="filter">
           <p>Filter</p>
           <button
@@ -28,12 +28,23 @@
         </div>
         <!-- workを全画面表示する場合 -->
         <div id="workPage" ref="workPage">
-          <div class="closeBtn" @click="hideItem"></div>
-          <div class="carousel">
-            <div v-for="(work, idx) in works" :key="idx">
-              <img :src="'/works/' + work[3]" />
+          <div class="workPageWrapper">
+            <div class="contentHeroImg">
+              <img
+                :src="'/works/' + works[currentContentIdx][0] + '.png'"
+                alt=""
+              />
             </div>
+            <div class="content">
+              <h3>{{ works[currentContentIdx][1] }}</h3>
+            </div>
+            <!-- <div class="carousel">
+              <div v-for="(work, idx) in works" :key="idx">
+                <img :src="'/works/' + work[3]" />
+              </div>
+            </div> -->
           </div>
+          <div class="closeBtn" @click="hideItem"></div>
         </div>
       </main>
     </div>
@@ -56,14 +67,14 @@ export default {
           'wishuponastar',
           'iPhoneアプリ\n「星に願いを。」',
           '2021/04/12',
-          'WishUponAStar.png',
-          [2],
+          'wishuponastar.png',
         ],
         ['zuitei', '懐石料亭 瑞亭様', '2019/04/25', 'zuitei_thumbnail.png'],
         ['syoryu', '有限会社 松隆様', '2020/04/17', 'syoryu_thumbnail.png'],
         ['more', 'More様', '2020/09/04', 'more_thumbnail.png'],
         ['hanamura', '花むら様', '2021/05/11', 'hanamura_thumbnail.png'],
       ],
+      currentContentIdx: 0,
     }
   },
   mounted() {
@@ -92,6 +103,8 @@ export default {
       this.$router.push({ path: '/works/?category=' + category })
     },
     showItem(idx) {
+      // current切り替え
+      this.currentContentIdx = idx
       // #workPage表示
       this.$refs.workPage.classList.add('show')
       // workImg表示
@@ -110,7 +123,7 @@ export default {
 
       // 画像位置設定
       workImg.style.top = 20 - 100 * row + '%'
-      workImg.style.left = -100 * (idx % 4) + '%'
+      workImg.style.left = 0 - 100 * (idx % 4) + '%'
     },
     hideItem(idx) {
       // #workPage表示
@@ -142,7 +155,7 @@ h2 {
 }
 main {
   width: 85%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   margin-top: 2rem;
   //   background: #f9f9f9a4;
@@ -185,9 +198,9 @@ main {
 #stage .item > img {
   display: block;
   position: relative;
-  z-index: 21;
-  top: 0;
-  left: 0;
+  z-index: 22;
+  top: 0%;
+  left: 0%;
   width: 100%;
   margin-top: -100%;
   visibility: hidden;
@@ -211,7 +224,16 @@ main {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: #000;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000;
+  }
 
   // animation
   visibility: hidden;
@@ -222,13 +244,59 @@ main {
   visibility: visible;
   opacity: 1;
 }
+#workPage .workPageWrapper {
+  display: flex;
+  position: relative;
+  width: 85%;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 7rem;
+}
+
+#workPage.show .contentHeroImg {
+  position: relative;
+  width: 30%;
+  height: 100%;
+  opacity: 0;
+  animation-name: fadeIn;
+  animation-delay: 0.8s;
+  animation-duration: 0.4s;
+  animation-fill-mode: forwards;
+
+  img {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    width: 100%;
+  }
+}
+#workPage .content {
+  width: 60%;
+  margin: 0 0 0 auto;
+  color: #fff;
+}
+
+// #workPage .carousel {
+//   overflow: scroll;
+//   position: relative;
+//   z-index: 21;
+//   width: 20%;
+//   height: 94vh;
+//   margin-left: 5%;
+
+//   img {
+//     display: block;
+//     width: 100%;
+//   }
+// }
 
 // バツボタン
 #workPage .closeBtn {
-  position: relative;
+  position: absolute;
   width: 3rem;
   height: 3rem;
-  top: 4.5rem;
+  top: 8%;
   left: 93%;
   &::before,
   &::after {
@@ -250,13 +318,27 @@ main {
 
 @keyframes workImgAnim {
   0% {
+    opacity: 1;
     transform: scale(1) rotateY(0);
   }
   50% {
-    transform: scale(1.7) rotateY(-360deg);
+    transform: scale(2) rotateY(-360deg);
+  }
+  98% {
+    opacity: 1;
   }
   100% {
+    opacity: 0;
     transform: scale(1) rotateY(-360 * 2 + deg);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 </style>
