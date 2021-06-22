@@ -17,16 +17,24 @@
         </div> -->
         <div id="stage" ref="stage">
           <div v-for="(work, idx) in works" :key="idx" class="item">
+            <Work :data="work" />
+          </div>
+          <!-- <div
+            v-for="(work, idx) in works"
+            :key="idx"
+            class="item"
+            @click="showItem(work[0])"
+          >
             <div class="itemInner">
-              <img :src="'/works/' + work[2]" />
+              <img :src="'/works/' + work[3]" />
               <div class="hover">
                 <div>
-                  <h3>{{ work[0] }}</h3>
-                  <p>{{ work[1] }}</p>
+                  <h3>{{ work[1] }}</h3>
+                  <p>{{ work[2] }}</p>
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </main>
     </div>
@@ -34,22 +42,28 @@
 </template>
 
 <script>
+import Work from '@/components/Parts/Works/work.vue'
+
 export default {
+  components: {
+    Work,
+  },
   data() {
     return {
       categories: ['All', 'Frontend', 'Native App', 'Camera', 'Graphic'],
       works: [
-        // ['タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'],
+        // ['id','タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'],
         [
+          'wishuponastar',
           'iPhoneアプリ\n「星に願いを。」',
           '2021/04/12',
           'WishUponAStar.png',
           [2],
         ],
-        ['懐石料亭 瑞亭様', '2019/04/25', 'zuitei_thumbnail.png'],
-        ['有限会社 松隆様', '2020/04/17', 'syoryu_thumbnail.png'],
-        ['More様', '2020/09/04', 'more_thumbnail.png'],
-        ['花むら様', '2021/05/11', 'hanamura_thumbnail.png'],
+        ['zuitei', '懐石料亭 瑞亭様', '2019/04/25', 'zuitei_thumbnail.png'],
+        ['syoryu', '有限会社 松隆様', '2020/04/17', 'syoryu_thumbnail.png'],
+        ['more', 'More様', '2020/09/04', 'more_thumbnail.png'],
+        ['hanamura', '花むら様', '2021/05/11', 'hanamura_thumbnail.png'],
       ],
     }
   },
@@ -78,8 +92,8 @@ export default {
       // クエリパラメータを設定
       this.$router.push({ path: '/works/?category=' + category })
     },
-    generateRandom(min, max) {
-      return Math.floor(Math.random() * (max - min) + min)
+    showItem(idx) {
+      console.log(idx)
     },
   },
 }
@@ -133,63 +147,11 @@ main {
 
   .item {
     cursor: pointer;
-    position: relative;
     width: 25%;
     overflow: hidden;
     // margin: 2rem;
     // border-radius: 5%;
     border: solid 1px #fff;
-  }
-  .itemInner {
-    width: 100%;
-    padding-bottom: 100%;
-
-    img {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      display: block;
-      width: 100%;
-      transform: translate(-50%, -50%);
-    }
-
-    .hover {
-      // position
-      position: absolute;
-      z-index: 11;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      // font
-      color: #fff;
-      text-align: center;
-      // animation
-      visibility: hidden;
-      opacity: 0;
-      transition: opacity 0.4s, visibility 0.4s;
-
-      > div {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-      }
-      h3 {
-        white-space: pre-wrap;
-        font-size: 1.4em;
-      }
-      p {
-        margin-top: 5%;
-      }
-    }
-
-    &:hover .hover {
-      visibility: visible;
-      opacity: 1;
-    }
   }
 }
 </style>
