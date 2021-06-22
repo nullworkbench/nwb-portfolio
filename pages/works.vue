@@ -15,6 +15,7 @@
             {{ category }}
           </button>
         </div> -->
+        <!-- works表示 -->
         <div id="stage" ref="stage">
           <div
             v-for="(work, idx) in works"
@@ -36,7 +37,7 @@
               />
             </div>
             <div class="content">
-              <h3>{{ works[currentContentIdx][1] }}</h3>
+              <component :is="works[currentContentIdx][0]"></component>
             </div>
             <!-- <div class="carousel">
               <div v-for="(work, idx) in works" :key="idx">
@@ -53,10 +54,20 @@
 
 <script>
 import Work from '@/components/Parts/Works/work.vue'
+import wishuponastar from '@/components/Parts/Works/Pages/wishuponastar.vue'
+import zuitei from '@/components/Parts/Works/Pages/zuitei.vue'
+import syoryu from '@/components/Parts/Works/Pages/syoryu.vue'
+import more from '@/components/Parts/Works/Pages/more.vue'
+import hanamura from '@/components/Parts/Works/Pages/hanamura.vue'
 
 export default {
   components: {
     Work,
+    wishuponastar,
+    zuitei,
+    syoryu,
+    more,
+    hanamura,
   },
   data() {
     return {
@@ -253,22 +264,24 @@ main {
   margin-top: 7rem;
 }
 
-#workPage.show .contentHeroImg {
+#workPage .contentHeroImg {
   position: relative;
   width: 30%;
   height: 100%;
-  opacity: 0;
-  animation-name: fadeIn;
-  animation-delay: 0.8s;
-  animation-duration: 0.4s;
-  animation-fill-mode: forwards;
-
   img {
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     display: block;
     width: 100%;
+  }
+}
+#workPage.show {
+  .contentHeroImg,
+  .content {
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-delay: 0.8s;
+    animation-duration: 0.4s;
+    animation-fill-mode: forwards;
   }
 }
 #workPage .content {
