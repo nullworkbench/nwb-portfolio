@@ -39,17 +39,17 @@ export default {
     return {
       categories: ['All', 'Frontend', 'Native App', 'Camera', 'Graphic'],
       works: [
-        ['タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'],
+        // ['タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'],
         [
           'iPhoneアプリ\n「星に願いを。」',
           '2021/04/12',
           'WishUponAStar.png',
           [2],
         ],
-        ['懐石料亭 瑞亭', '2019/04/25', 'zuitei.png'],
-        ['有限会社 松隆', '2020/04/17', 'syoryu.png'],
-        ['More', '2020/09/04', 'more.png'],
-        ['花むら', '2021/05/11', 'hanamura.png'],
+        ['懐石料亭 瑞亭様', '2019/04/25', 'zuitei_thumbnail.png'],
+        ['有限会社 松隆様', '2020/04/17', 'syoryu_thumbnail.png'],
+        ['More様', '2020/09/04', 'more_thumbnail.png'],
+        ['花むら様', '2021/05/11', 'hanamura_thumbnail.png'],
       ],
     }
   },
@@ -86,8 +86,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.container {
+}
 h2 {
-  margin-top: 7rem;
+  margin-top: 8rem;
+  margin-bottom: 5rem;
   text-align: center;
 }
 
@@ -95,9 +98,11 @@ h2 {
   padding-top: 5rem;
 }
 main {
+  width: 85%;
   max-width: 1000px;
   margin: 0 auto;
   margin-top: 2rem;
+  //   background: #f9f9f9a4;
 }
 
 #filter {
@@ -131,7 +136,9 @@ main {
     position: relative;
     width: 25%;
     overflow: hidden;
-    margin: 2rem;
+    // margin: 2rem;
+    // border-radius: 5%;
+    border: solid 1px #fff;
   }
   .itemInner {
     width: 100%;
