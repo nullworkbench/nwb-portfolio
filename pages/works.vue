@@ -3,7 +3,7 @@
     <h2>Works</h2>
     <div class="mainWrapper">
       <main>
-        <div id="filter">
+        <!-- <div id="filter">
           <p>Filter</p>
           <button
             v-for="(category, idx) in categories"
@@ -14,15 +14,16 @@
           >
             {{ category }}
           </button>
-        </div>
+        </div> -->
         <div id="stage" ref="stage">
           <div v-for="(work, idx) in works" :key="idx" class="item">
             <div class="itemInner">
-              <img :src="'/works/' + work[3]" />
+              <img :src="'/works/' + work[2]" />
               <div class="hover">
-                <h3>{{ work[0] }}</h3>
-                <p>{{ work[1] }}</p>
-                <p>{{ work[2] }}</p>
+                <div>
+                  <h3>{{ work[0] }}</h3>
+                  <p>{{ work[1] }}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -38,19 +39,22 @@ export default {
     return {
       categories: ['All', 'Frontend', 'Native App', 'Camera', 'Graphic'],
       works: [
-        ['タイトル', '日付', '説明文', '画像リンク（/works以下）'],
+        ['タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'],
         [
           'iPhoneアプリ\n「星に願いを。」',
           '2021/04/12',
-          '夜空を見上げ、リアルタイムに願い事を共有できるアプリ。',
           'WishUponAStar.png',
+          [2],
         ],
+        ['懐石料亭 瑞亭', '2019/04/25', 'zuitei.png'],
+        ['有限会社 松隆', '2020/04/17', 'syoryu.png'],
+        ['More', '2020/09/04', 'more.png'],
+        ['花むら', '2021/05/11', 'hanamura.png'],
       ],
     }
   },
   mounted() {
-    this.setFilter()
-    this.arrangeItems()
+    // this.setFilter()
   },
   methods: {
     setFilter() {
@@ -74,56 +78,6 @@ export default {
       // クエリパラメータを設定
       this.$router.push({ path: '/works/?category=' + category })
     },
-    arrangeItems() {
-      const stageElm = this.$refs.stage
-      const items = document.getElementsByClassName('item')
-
-      const positions = []
-
-      for (const item of items) {
-        const width = this.generateRandom(20, 25)
-        let x = this.generateRandom(
-          0,
-          stageElm.clientWidth - stageElm.clientWidth * (width / 100)
-        )
-        let y = this.generateRandom(
-          0,
-          stageElm.clientHeight - stageElm.clientWidth * (width / 100)
-        )
-
-        // 被らないように
-        for (let i = 0; i < positions.length; i++) {
-          const itemRadius = stageElm.clientWidth * (width / 100)
-          // x
-          while (
-            x > positions[i].x - itemRadius &&
-            x < positions[i].x + itemRadius
-          ) {
-            x = this.generateRandom(
-              0,
-              stageElm.clientWidth - stageElm.clientWidth * (width / 100)
-            )
-          }
-          // y
-          while (
-            y > positions[i].y + itemRadius &&
-            y < positions[i].y - itemRadius
-          ) {
-            y = this.generateRandom(
-              0,
-              stageElm.clientHeight - stageElm.clientWidth * (width / 100)
-            )
-          }
-        }
-
-        positions.push({ x, y, width })
-
-        // style設定
-        item.style.left = x + 'px'
-        item.style.top = y + 'px'
-        item.style.width = width + '%'
-      }
-    },
     generateRandom(min, max) {
       return Math.floor(Math.random() * (max - min) + min)
     },
@@ -132,6 +86,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h2 {
+  margin-top: 7rem;
+  text-align: center;
+}
+
 .mainWrapepr {
   padding-top: 5rem;
 }
@@ -164,40 +123,27 @@ main {
 
 #stage {
   position: relative;
-  height: 75vh;
+  display: flex;
+  flex-wrap: wrap;
 
   .item {
     cursor: pointer;
-    position: absolute;
-    width: 30%;
-    border-radius: 50%;
+    position: relative;
+    width: 25%;
     overflow: hidden;
+    margin: 2rem;
   }
   .itemInner {
-    position: relative;
-    z-index: 10;
     width: 100%;
     padding-bottom: 100%;
 
-    // 丸っこく見せるための内側のshadow
-    &::after {
-      content: '';
-      position: absolute;
-      z-index: 10;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      box-shadow: 0 0 2vw #e6e6e6 inset;
-    }
-
     img {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 50%;
+      left: 50%;
       display: block;
       width: 100%;
+      transform: translate(-50%, -50%);
     }
 
     .hover {
@@ -209,7 +155,6 @@ main {
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
-      padding: 25% 2rem;
       // font
       color: #fff;
       text-align: center;
@@ -218,6 +163,13 @@ main {
       opacity: 0;
       transition: opacity 0.4s, visibility 0.4s;
 
+      > div {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+      }
       h3 {
         white-space: pre-wrap;
         font-size: 1.4em;
