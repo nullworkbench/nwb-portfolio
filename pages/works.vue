@@ -15,14 +15,15 @@
             {{ category }}
           </button>
         </div>
-        <div id="stage">
+        <div id="stage" ref="stage">
           <div v-for="(work, idx) in works" :key="idx" class="item">
-            <img :src="'/works/' + work[3]" />
-
-            <div class="hover">
-              <h3>{{ work[0] }}</h3>
-              <p>{{ work[1] }}</p>
-              <p>{{ work[2] }}</p>
+            <div class="itemInner">
+              <img :src="'/works/' + work[3]" />
+              <div class="hover">
+                <h3>{{ work[0] }}</h3>
+                <p>{{ work[1] }}</p>
+                <p>{{ work[2] }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -48,14 +49,18 @@ export default {
     }
   },
   mounted() {
-    const category = this.$route.query.category
-    if (category) {
-      this.$refs[category][0].classList.add('active')
-    } else {
-      this.$refs.all[0].classList.add('active')
-    }
+    this.setFilter()
+    this.arrangeItems()
   },
   methods: {
+    setFilter() {
+      const category = this.$route.query.category
+      if (category) {
+        this.$refs[category][0].classList.add('active')
+      } else {
+        this.$refs.all[0].classList.add('active')
+      }
+    },
     changeFilter(str) {
       // categoryNameを小文字に変換する
       const category = String(str).toLowerCase().replace(/\s+/g, '')
@@ -68,6 +73,59 @@ export default {
       btn.classList.add('active')
       // クエリパラメータを設定
       this.$router.push({ path: '/works/?category=' + category })
+    },
+    arrangeItems() {
+      const stageElm = this.$refs.stage
+      const items = document.getElementsByClassName('item')
+
+      const positions = []
+
+      for (const item of items) {
+        const width = this.generateRandom(20, 25)
+        let x = this.generateRandom(
+          0,
+          stageElm.clientWidth - stageElm.clientWidth * (width / 100)
+        )
+        let y = this.generateRandom(
+          0,
+          stageElm.clientHeight - stageElm.clientWidth * (width / 100)
+        )
+
+        // 被らないように
+        for (let i = 0; i < positions.length; i++) {
+          const itemRadius = stageElm.clientWidth * (width / 100)
+          // x
+          while (
+            x > positions[i].x - itemRadius &&
+            x < positions[i].x + itemRadius
+          ) {
+            x = this.generateRandom(
+              0,
+              stageElm.clientWidth - stageElm.clientWidth * (width / 100)
+            )
+          }
+          // y
+          while (
+            y > positions[i].y + itemRadius &&
+            y < positions[i].y - itemRadius
+          ) {
+            y = this.generateRandom(
+              0,
+              stageElm.clientHeight - stageElm.clientWidth * (width / 100)
+            )
+          }
+        }
+
+        positions.push({ x, y, width })
+
+        // style設定
+        item.style.left = x + 'px'
+        item.style.top = y + 'px'
+        item.style.width = width + '%'
+      }
+    },
+    generateRandom(min, max) {
+      return Math.floor(Math.random() * (max - min) + min)
     },
   },
 }
@@ -105,14 +163,21 @@ main {
 }
 
 #stage {
+  position: relative;
+  height: 75vh;
+
   .item {
     cursor: pointer;
-    position: relative;
+    position: absolute;
     width: 30%;
-    padding-bottom: 30%;
-    background: #f9f9f9;
     border-radius: 50%;
     overflow: hidden;
+  }
+  .itemInner {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding-bottom: 100%;
 
     // 丸っこく見せるための内側のshadow
     &::after {
@@ -124,7 +189,7 @@ main {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      box-shadow: 0 0 3rem #e6e6e6 inset;
+      box-shadow: 0 0 2vw #e6e6e6 inset;
     }
 
     img {
@@ -144,7 +209,7 @@ main {
       width: 100%;
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
-      padding: 4.5rem 2rem;
+      padding: 25% 2rem;
       // font
       color: #fff;
       text-align: center;
@@ -155,10 +220,10 @@ main {
 
       h3 {
         white-space: pre-wrap;
-        font-size: 1.3rem;
+        font-size: 1.4em;
       }
       p {
-        margin-top: 1rem;
+        margin-top: 5%;
       }
     }
 
