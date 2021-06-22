@@ -174,11 +174,15 @@ main {
   visibility: hidden;
 
   // animation
-  transition: top 0.4s, left 0.4s;
+  transition: top 0.8s, left 0.8s, transform 0.8s;
 
   &.show {
     visibility: visible;
     z-index: 21;
+    animation-name: workImgAnim;
+    animation-duration: 0.8s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
   }
 }
 #workPage {
@@ -198,5 +202,17 @@ main {
 #workPage.show {
   visibility: visible;
   opacity: 1;
+}
+
+@keyframes workImgAnim {
+  0% {
+    transform: scale(1) rotateY(0);
+  }
+  50% {
+    transform: scale(1.7) rotateY(-360deg);
+  }
+  100% {
+    transform: scale(1) rotateY(-360 * 2 + deg);
+  }
 }
 </style>
