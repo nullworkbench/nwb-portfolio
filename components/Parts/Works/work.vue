@@ -1,5 +1,5 @@
 <template>
-  <div class="work" @click="showItem(data[0])">
+  <div class="work">
     <div class="workInner">
       <img :src="'/works/' + data[3]" />
       <div class="hover">
@@ -20,9 +20,7 @@ export default {
       required: true,
     },
   },
-  methods: {
-    showItem() {},
-  },
+  methods: {},
 }
 </script>
 

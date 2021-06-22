@@ -16,26 +16,18 @@
           </button>
         </div> -->
         <div id="stage" ref="stage">
-          <div v-for="(work, idx) in works" :key="idx" class="item">
-            <Work :data="work" />
-          </div>
-          <!-- <div
+          <div
             v-for="(work, idx) in works"
             :key="idx"
             class="item"
-            @click="showItem(work[0])"
+            @click="showItem(idx)"
           >
-            <div class="itemInner">
-              <img :src="'/works/' + work[3]" />
-              <div class="hover">
-                <div>
-                  <h3>{{ work[1] }}</h3>
-                  <p>{{ work[2] }}</p>
-                </div>
-              </div>
-            </div>
-          </div> -->
+            <Work :data="work" />
+            <img :ref="'workImg_' + work[0]" :src="'/works/' + work[3]" />
+          </div>
         </div>
+        <!-- workを全画面表示する場合 -->
+        <div id="workPage" ref="workPage"></div>
       </main>
     </div>
   </div>
@@ -52,7 +44,7 @@ export default {
     return {
       categories: ['All', 'Frontend', 'Native App', 'Camera', 'Graphic'],
       works: [
-        // ['id','タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'],
+        // ['workId','タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'],
         [
           'wishuponastar',
           'iPhoneアプリ\n「星に願いを。」',
@@ -93,7 +85,25 @@ export default {
       this.$router.push({ path: '/works/?category=' + category })
     },
     showItem(idx) {
-      console.log(idx)
+      const data = this.works[idx]
+      this.$refs.workPage.classList.add('show')
+
+      const workImg = this.$refs['workImg_' + data[0]][0]
+      workImg.classList.add('show')
+
+      // 何行目か計算
+      const row = (function (num) {
+        let count = 0
+        while (num > 3) {
+          num = num / 3
+          count++
+        }
+        return count
+      })(idx)
+
+      // 画像位置設定
+      workImg.style.top = 20 - 100 * row + '%'
+      workImg.style.left = -100 * (idx % 4) + '%'
     },
   },
 }
@@ -103,7 +113,7 @@ export default {
 .container {
 }
 h2 {
-  margin-top: 8rem;
+  padding-top: 8rem;
   margin-bottom: 5rem;
   text-align: center;
 }
@@ -141,17 +151,52 @@ main {
 }
 
 #stage {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
 
   .item {
     cursor: pointer;
     width: 25%;
-    overflow: hidden;
-    // margin: 2rem;
-    // border-radius: 5%;
+    // overflow: hidden;
     border: solid 1px #fff;
   }
+}
+
+// workの全画面表示
+#stage .item > img {
+  display: block;
+  position: relative;
+  z-index: 21;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-top: -100%;
+  visibility: hidden;
+
+  // animation
+  transition: top 0.4s, left 0.4s;
+
+  &.show {
+    visibility: visible;
+    z-index: 21;
+  }
+}
+#workPage {
+  position: absolute;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+
+  // animation
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s, visibility 0.4s;
+}
+#workPage.show {
+  visibility: visible;
+  opacity: 1;
 }
 </style>
