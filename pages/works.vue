@@ -23,11 +23,18 @@
             @click="showItem(idx)"
           >
             <Work :data="work" />
-            <img :ref="'workImg_' + work[0]" :src="'/works/' + work[3]" />
+            <img class="workImg" :src="'/works/' + work[3]" />
           </div>
         </div>
         <!-- workを全画面表示する場合 -->
-        <div id="workPage" ref="workPage"></div>
+        <div id="workPage" ref="workPage">
+          <div class="closeBtn" @click="hideItem"></div>
+          <div class="carousel">
+            <div v-for="(work, idx) in works" :key="idx">
+              <img :src="'/works/' + work[3]" />
+            </div>
+          </div>
+        </div>
       </main>
     </div>
   </div>
@@ -85,10 +92,10 @@ export default {
       this.$router.push({ path: '/works/?category=' + category })
     },
     showItem(idx) {
-      const data = this.works[idx]
+      // #workPage表示
       this.$refs.workPage.classList.add('show')
-
-      const workImg = this.$refs['workImg_' + data[0]][0]
+      // workImg表示
+      const workImg = document.getElementsByClassName('workImg')[idx]
       workImg.classList.add('show')
 
       // 何行目か計算
@@ -104,6 +111,18 @@ export default {
       // 画像位置設定
       workImg.style.top = 20 - 100 * row + '%'
       workImg.style.left = -100 * (idx % 4) + '%'
+    },
+    hideItem(idx) {
+      // #workPage表示
+      this.$refs.workPage.classList.remove('show')
+      // workImg表示
+      const workImg = document.getElementsByClassName('workImg')
+      for (const w of workImg) {
+        w.classList.remove('show')
+        // 画像位置設定
+        w.style.top = 0 + '%'
+        w.style.left = 0 + '%'
+      }
     },
   },
 }
@@ -202,6 +221,31 @@ main {
 #workPage.show {
   visibility: visible;
   opacity: 1;
+}
+
+// バツボタン
+#workPage .closeBtn {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  top: 4.5rem;
+  left: 93%;
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3rem;
+    height: 1.5px;
+    background: #fff;
+  }
+  &::before {
+    transform: rotateZ(-45deg);
+  }
+  &::after {
+    transform: rotateZ(45deg);
+  }
 }
 
 @keyframes workImgAnim {
