@@ -78,7 +78,7 @@ export default {
           'wishuponastar',
           'iPhoneアプリ\n「星に願いを。」',
           '2021/04/12',
-          'wishuponastar.png',
+          'wishuponastar_thumbnail.png',
         ],
         ['zuitei', '懐石料亭 瑞亭様', '2019/04/25', 'zuitei_thumbnail.png'],
         ['syoryu', '有限会社 松隆様', '2020/04/17', 'syoryu_thumbnail.png'],
@@ -243,7 +243,7 @@ main {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background: #000;
+    background: #111;
   }
 
   // animation
@@ -286,8 +286,11 @@ main {
 }
 #workPage .content {
   width: 60%;
+  height: calc(100vh - 7rem);
   margin: 0 0 0 auto;
   color: #fff;
+  font-weight: 400;
+  overflow: scroll;
 }
 
 // #workPage .carousel {
