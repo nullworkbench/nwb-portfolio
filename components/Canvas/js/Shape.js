@@ -1,10 +1,15 @@
 import * as THREE from 'three'
+import { Vector2 } from 'three'
 import Controller from './Controller'
 
 export default class Shape {
   constructor() {
     this.segments = 80
     this.rotationSpeed = 0.001
+
+    // マウス座標
+    this.mouse = new Vector2(0, 0)
+
     this.init()
   }
 
@@ -251,6 +256,15 @@ export default class Shape {
     action.clampWhenFinished = true // アニメーションの最後のフレームで一時停止する
     action.setLoop(THREE.LoopRepeat, 1) // アニメーションの回数
     action.play() // アニメーション開始
+  }
+
+  // マウス座標更新時に発火（CanvasGLでリッスンしている）
+  mouseMoved(x, y) {
+    this.mouse.x = x - Controller.size.windowWidth / 2 // 原点を中心に
+    this.mouse.y = y - Controller.size.windowHeight / 2 // 原点を中心に
+
+    this.icosahedron.rotation.x -= this.mouse.y / 50000
+    this.icosahedron.rotation.y -= this.mouse.x / 50000
   }
 
   // 毎フレーム更新したいこと

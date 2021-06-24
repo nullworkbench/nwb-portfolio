@@ -6,6 +6,7 @@ class Controller {
     this.camera = null
     this.renderer = null
 
+    // ウィンドウサイズ
     this.size = {
       windowWidth: null,
       windowHeight: null,

@@ -23,6 +23,9 @@ export default class CanvasGL {
     // ウィンドウリサイズリッスン
     window.addEventListener('resize', this.resize.bind(this))
 
+    // マウス座標リッスン
+    // window.addEventListener('mousemove', this.mouseMoved.bind(this))
+
     // フレーム描画開始
     this.loop()
   }
@@ -33,6 +36,10 @@ export default class CanvasGL {
 
   resize() {
     Controller.resize()
+  }
+
+  mouseMoved(mouse) {
+    this.shape.mouseMoved(mouse.clientX, mouse.clientY)
   }
 
   // レンダリング
