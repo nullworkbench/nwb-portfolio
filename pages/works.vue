@@ -24,7 +24,7 @@
             @click="showItem(idx)"
           >
             <Work :data="work" />
-            <img class="workImg" :src="'/works/' + work[3]" />
+            <img class="workImg" :src="'/works/' + work.imgPath" />
           </div>
         </div>
         <!-- workを全画面表示する場合 -->
@@ -32,12 +32,12 @@
           <div class="workPageWrapper">
             <div class="contentHeroImg">
               <img
-                :src="'/works/' + works[currentContentIdx][0] + '.png'"
+                :src="'/works/' + works[currentContentIdx].id + '.png'"
                 alt=""
               />
             </div>
             <div class="content">
-              <component :is="works[currentContentIdx][0]"></component>
+              <component :is="works[currentContentIdx].id"></component>
             </div>
             <!-- <div class="carousel">
               <div v-for="(work, idx) in works" :key="idx">
@@ -73,17 +73,32 @@ export default {
     return {
       categories: ['All', 'Frontend', 'Native App', 'Camera', 'Graphic'],
       works: [
-        // ['workId','タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'],
-        [
+        // ('workId','タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'),
+        new WorkItem(
           'wishuponastar',
           'iPhoneアプリ\n「星に願いを。」',
           '2021/04/12',
-          'wishuponastar_thumbnail.png',
-        ],
-        ['zuitei', '懐石料亭 瑞亭様', '2019/04/25', 'zuitei_thumbnail.png'],
-        ['syoryu', '有限会社 松隆様', '2020/04/17', 'syoryu_thumbnail.png'],
-        ['more', 'More様', '2020/09/04', 'more_thumbnail.png'],
-        ['hanamura', '花むら様', '2021/05/11', 'hanamura_thumbnail.png'],
+          'wishuponastar_thumbnail.png'
+        ),
+        new WorkItem(
+          'zuitei',
+          '懐石料亭 瑞亭様',
+          '2019/04/25',
+          'zuitei_thumbnail.png'
+        ),
+        new WorkItem(
+          'syoryu',
+          '有限会社 松隆様',
+          '2020/04/17',
+          'syoryu_thumbnail.png'
+        ),
+        new WorkItem('more', 'More様', '2020/09/04', 'more_thumbnail.png'),
+        new WorkItem(
+          'hanamura',
+          '花むら様',
+          '2021/05/11',
+          'hanamura_thumbnail.png'
+        ),
       ],
       currentContentIdx: 0,
     }
@@ -115,7 +130,7 @@ export default {
     },
     showItem(idx) {
       // パラメータ設定
-      this.$router.push({ path: '', query: { wid: this.works[idx][0] } })
+      this.$router.push({ path: '', query: { wid: this.works[idx].id } })
       // current切り替え
       this.currentContentIdx = idx
       // #workPage表示
@@ -143,14 +158,21 @@ export default {
       this.$refs.workPage.classList.remove('show')
       // workImg表示
       const workImg = document.getElementsByClassName('workImg')
-      for (const w of workImg) {
-        w.classList.remove('show')
-        // 画像位置設定
-        w.style.top = 0 + '%'
-        w.style.left = 0 + '%'
-      }
+      const target = workImg[this.currentContentIdx]
+      target.style.top = 0 + '%'
+      target.style.left = 0 + '%'
     },
   },
+}
+
+// work
+class WorkItem {
+  constructor(id, title, date, imgPath) {
+    this.id = id
+    this.title = title
+    this.date = date
+    this.imgPath = imgPath
+  }
 }
 </script>
 

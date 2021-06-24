@@ -1,11 +1,11 @@
 <template>
   <div class="work">
     <div class="workInner">
-      <img :src="'/works/' + data[3]" />
+      <img :src="'/works/' + data.imgPath" />
       <div class="hover">
         <div>
-          <h3>{{ data[1] }}</h3>
-          <p>{{ data[2] }}</p>
+          <h3>{{ data.title }}</h3>
+          <p>{{ data.date }}</p>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
 export default {
   props: {
     data: {
-      type: Array,
+      type: Object,
       required: true,
     },
   },
