@@ -114,6 +114,8 @@ export default {
       this.$router.push({ path: '/works/?category=' + category })
     },
     showItem(idx) {
+      // パラメータ設定
+      this.$router.push({ path: '', query: { wid: this.works[idx][0] } })
       // current切り替え
       this.currentContentIdx = idx
       // #workPage表示
