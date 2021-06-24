@@ -36,7 +36,7 @@
                 alt=""
               />
             </div>
-            <div class="content">
+            <div ref="workPage__content" class="content">
               <component :is="works[currentContentIdx].id"></component>
             </div>
             <!-- <div class="carousel">
@@ -59,6 +59,8 @@ import zuitei from '@/components/Parts/Works/Pages/zuitei.vue'
 import syoryu from '@/components/Parts/Works/Pages/syoryu.vue'
 import more from '@/components/Parts/Works/Pages/more.vue'
 import hanamura from '@/components/Parts/Works/Pages/hanamura.vue'
+
+const sleep = (sec) => new Promise((resolve) => setTimeout(resolve, sec * 1000))
 
 export default {
   components: {
@@ -153,7 +155,7 @@ export default {
       workImg.style.top = 20 - 100 * row + '%'
       workImg.style.left = 0 - 100 * (idx % 4) + '%'
     },
-    hideItem(idx) {
+    async hideItem(idx) {
       // #workPage表示
       this.$refs.workPage.classList.remove('show')
       // workImg表示
@@ -161,6 +163,10 @@ export default {
       const target = workImg[this.currentContentIdx]
       target.style.top = 0 + '%'
       target.style.left = 0 + '%'
+
+      // workPageスクロールリセット
+      await sleep(1)
+      this.$refs.workPage__content.scrollTo(0, 0)
     },
   },
 }
