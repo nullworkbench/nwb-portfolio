@@ -141,10 +141,17 @@ export default class Shape {
       case 'about': {
         // 左端に移動するアニメーション
         const positionKeyframeTrackJSON = {
-          name: '.position[x]', // .parseTrackName
-          type: 'number', // nameに設定したプロパティの型
+          name: '.position', // .parseTrackName
+          type: 'vector', // nameに設定したプロパティの型
           times: [0, 0.8], // 時間の区切り
-          values: [0, -Controller.size.windowWidth / 2], // 0秒の時に[0,0,0], 1秒の時に[2,1,15]
+          values: [
+            this.icosahedron.position.x,
+            this.icosahedron.position.y,
+            this.icosahedron.position.z,
+            -Controller.size.windowWidth / 2,
+            0,
+            0,
+          ], // 0秒の時に[0,0,0], 1秒の時に[2,1,15]
         }
         // 拡大するアニメーション
         const scaleKeyframeTrackJSON = {
@@ -198,12 +205,16 @@ export default class Shape {
       }
       case 'blog': {
         const positionKeyframeTrackJSON = {
-          name: '.position[y]',
-          type: 'number',
+          name: '.position',
+          type: 'vector',
           times: [0, 0.8],
           values: [
+            this.icosahedron.position.x,
             this.icosahedron.position.y,
+            this.icosahedron.position.z,
+            0,
             Controller.size.windowHeight / 1.1,
+            0,
           ],
         }
         const scaleKeyframeTrackJSON = {
