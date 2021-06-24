@@ -35,7 +35,19 @@
               その後はWebサイトをお持ちでない商店へ営業をするなどし、2020年に「個人事業主
               nullworkbench」として開業。Webコーディングと同じく趣味としていたカメラを扱う技術を組み合わせ、写真、動画撮影も事業に追加。
             </p>
+            <p>
+              質の高いものを目指すだけでなく、全ての人にインターネットを通じた情報発信の場を利用していただくため、Webサイトに限らず様々な方法でお客様のご期待や、費用対効果にお応えできるようコンサルティングさせていただきます！
+            </p>
           </div>
+          <!-- accounts -->
+          <!-- <div class="accounts">
+            <div class="github account">
+              <img src="/icons/github.svg" alt="" />
+            </div>
+            <div class="qiita account">
+              <img src="/icons/qiitan.svg" alt="" />
+            </div>
+          </div> -->
         </section>
 
         <!-- Skills -->
@@ -162,6 +174,22 @@ h3 {
       .sub {
         color: #9a9a9a;
       }
+    }
+  }
+
+  .accounts {
+    // .account {
+    //   width: ;
+    // }
+    img {
+      display: block;
+      width: 3rem;
+    }
+    .github {
+      background: #333;
+    }
+    .qiita {
+      background: #55c500;
     }
   }
 }
