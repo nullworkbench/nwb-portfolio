@@ -107,6 +107,13 @@ export default {
   },
   mounted() {
     // this.setFilter()
+    // queryでitemが指定されていれば表示する
+    if (this.$route.query.wid) {
+      const specifiedIdx = this.works.findIndex(
+        (v) => v.id === this.$route.query.wid
+      )
+      this.showItem(specifiedIdx)
+    }
   },
   methods: {
     setFilter() {
