@@ -239,6 +239,37 @@ export default class Shape {
         clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
         break
       }
+      case 'contact': {
+        const positionKeyframeTrackJSON = {
+          name: '.position',
+          type: 'vector',
+          times: [0, 0.8],
+          values: [
+            this.icosahedron.position.x,
+            this.icosahedron.position.y,
+            this.icosahedron.position.z,
+            0,
+            0,
+            0,
+          ],
+        }
+        const scaleKeyframeTrackJSON = {
+          name: '.scale',
+          type: 'vector',
+          times: [0, 0.8],
+          values: [
+            this.icosahedron.scale.x,
+            this.icosahedron.scale.y,
+            this.icosahedron.scale.z,
+            1,
+            1,
+            1,
+          ],
+        }
+
+        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
+        break
+      }
       default:
         break
     }
