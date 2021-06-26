@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <div id="title">nullworkbench</div>
+    <div id="title">
+      <h2>nullworkbench</h2>
+      <p>"beginning from _"</p>
+    </div>
     <div id="sphereContent">
       <div ref="sphereContentInner" class="inner">
         <span class="heading">{{ sphereContents[sphereContentIdx][0] }}</span>
@@ -85,7 +88,14 @@ export default {
   transform: translateY(-50%);
 
   text-align: right;
-  font-size: 3rem;
+  h2 {
+    font-size: 3rem;
+    font-weight: 100;
+    margin-bottom: 0.2rem;
+  }
+  p {
+    font-size: 1.5rem;
+  }
 }
 
 #sphereContent {
