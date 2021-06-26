@@ -1,20 +1,55 @@
 <template>
   <div class="container">
     <div id="title">nullworkbench</div>
+    <div id="sphereContent">
+      <div ref="sphereContentInner" class="inner">
+        <span class="heading">{{ sphereContents[sphereContentIdx][0] }}</span>
+        <p>{{ sphereContents[sphereContentIdx][1] }}</p>
+      </div>
+    </div>
     <nav id="sideMenu">
       <ul>
-        <li><nuxt-link to="/about">About</nuxt-link></li>
-        <li><nuxt-link to="/works">Works</nuxt-link></li>
-        <li>Library</li>
-        <li><nuxt-link to="/blog">Blog</nuxt-link></li>
-        <li>Contact</li>
+        <li
+          v-for="(menu, idx) in menus"
+          :key="idx"
+          @mouseover="showContent(idx)"
+          @mouseout="hideContent(idx)"
+        >
+          <nuxt-link :to="menu.toLowerCase()">{{ menu }}</nuxt-link>
+        </li>
       </ul>
     </nav>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      menus: ['About', 'Works', 'Library', 'Blog', 'Contact'],
+      showSphereContent: false,
+      sphereContents: [
+        ['About Me', 'All About nullworkbench.'],
+        ['My Works', 'Be a Professional.'],
+        ['Library', 'Beautiful Scenes.'],
+        ['Blog', 'Logs of Learning.'],
+        ['Contact', 'Stay in Touch.'],
+      ],
+      sphereContentIdx: 0,
+    }
+  },
+  methods: {
+    showContent(idx) {
+      this.showSphereContent = true
+      this.sphereContentIdx = idx
+      document.getElementById('sphereContent').classList.add('show')
+    },
+    hideContent(idx) {
+      this.showSphereContent = false
+      document.getElementById('sphereContent').classList.remove('show')
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -38,6 +73,62 @@ export default {}
   font-size: 3rem;
 }
 
+#sphereContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.7);
+
+  // font
+  font-family: 'Comfortaa', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  text-align: center;
+
+  // animation
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.4s, opacity 0.4s;
+  &.show {
+    visibility: visible;
+    opacity: 1;
+
+    .inner {
+      height: 6rem;
+    }
+  }
+
+  .inner {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 0;
+    transition: height 0.4s;
+
+    text-align: center;
+  }
+  .heading {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: block;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 5rem;
+  }
+  p {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 200;
+  }
+}
+
 #sideMenu {
   /* position */
   position: absolute;
@@ -51,7 +142,16 @@ export default {}
     list-style: none;
   }
   li {
+    max-width: max-content;
     margin-bottom: 2rem;
+
+    a {
+      padding-right: 2rem;
+      transition: padding-left 0.4s;
+      &:hover {
+        padding-left: 1rem;
+      }
+    }
   }
 }
 </style>
