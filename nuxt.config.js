@@ -84,11 +84,6 @@ export default {
     ],
   ],
 
-  // router
-  router: {
-    base: '/nullworkbench.github.io/',
-  },
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
 
