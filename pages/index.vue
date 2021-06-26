@@ -5,6 +5,7 @@
       <div ref="sphereContentInner" class="inner">
         <span class="heading">{{ sphereContents[sphereContentIdx][0] }}</span>
         <p>{{ sphereContents[sphereContentIdx][1] }}</p>
+        <p>click to continue</p>
       </div>
     </div>
     <nav id="sideMenu">
@@ -15,7 +16,9 @@
           @mouseover="showContent(idx)"
           @mouseout="hideContent(idx)"
         >
-          <nuxt-link :to="menu.toLowerCase()">{{ menu }}</nuxt-link>
+          <nuxt-link :to="menu.toLowerCase()" class="menulink">{{
+            menu
+          }}</nuxt-link>
         </li>
       </ul>
     </nav>
@@ -43,10 +46,22 @@ export default {
       this.showSphereContent = true
       this.sphereContentIdx = idx
       document.getElementById('sphereContent').classList.add('show')
+
+      // ホバーしているもの以外の文字色を薄くする
+      const menulinks = document.getElementsByClassName('menulink')
+      for (let i = 0; i < menulinks.length; i++) {
+        if (i !== idx) menulinks[i].style.color = '#ddd'
+      }
     },
     hideContent(idx) {
       this.showSphereContent = false
       document.getElementById('sphereContent').classList.remove('show')
+
+      // 薄くした文字色を戻す
+      const menulinks = document.getElementsByClassName('menulink')
+      for (let i = 0; i < menulinks.length; i++) {
+        menulinks[i].style.color = '#333'
+      }
     },
   },
 }
@@ -96,7 +111,7 @@ export default {
     opacity: 1;
 
     .inner {
-      height: 6rem;
+      height: 10rem;
     }
   }
 
@@ -122,10 +137,17 @@ export default {
   }
   p {
     position: absolute;
-    bottom: 0;
     width: 100%;
-    font-size: 1.5rem;
     font-weight: 200;
+
+    &:nth-of-type(1) {
+      bottom: 40%;
+      font-size: 1.5rem;
+    }
+    &:nth-of-type(2) {
+      bottom: 0;
+      font-size: 1rem;
+    }
   }
 }
 
@@ -144,12 +166,29 @@ export default {
   li {
     max-width: max-content;
     margin-bottom: 2rem;
+  }
+  .menulink {
+    position: relative;
+    padding: 0.5rem 0;
+    padding-right: 2rem;
+    transition: padding-left 0.4s, color 0.4s;
 
-    a {
-      padding-right: 2rem;
-      transition: padding-left 0.4s;
-      &:hover {
-        padding-left: 1rem;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0.5rem;
+      width: 0;
+      height: 1px;
+      background: #333;
+      transition: width 0.4s;
+    }
+
+    &:hover {
+      padding-left: 1rem;
+
+      &::after {
+        width: 130%;
       }
     }
   }
