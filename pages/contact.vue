@@ -40,7 +40,7 @@ main {
   transform: translateY(-50%);
   width: 100%;
   margin: 0 auto;
-  /* margin-top: 10rem; */
+  margin-top: 2rem;
   text-align: center;
 }
 .name {
