@@ -168,6 +168,7 @@ export default {
       // workImg表示
       const workImg = document.getElementsByClassName('workImg')
       const target = workImg[this.currentContentIdx]
+      target.classList.remove('show')
       target.style.top = 0 + '%'
       target.style.left = 0 + '%'
 
