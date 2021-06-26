@@ -190,8 +190,6 @@ class WorkItem {
 </script>
 
 <style lang="scss" scoped>
-.container {
-}
 h2 {
   padding-top: 8rem;
   margin-bottom: 5rem;

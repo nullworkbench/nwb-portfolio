@@ -218,7 +218,7 @@ export default class Shape {
             this.icosahedron.position.y,
             this.icosahedron.position.z,
             0,
-            Controller.size.windowHeight / 1.1,
+            Controller.size.windowWidth / 2.2,
             0,
           ],
         }
