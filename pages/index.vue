@@ -121,7 +121,7 @@ export default {
     opacity: 1;
 
     .inner {
-      height: 10rem;
+      height: 13rem;
     }
   }
 
@@ -151,7 +151,7 @@ export default {
     font-weight: 200;
 
     &:nth-of-type(1) {
-      bottom: 40%;
+      top: 35%;
       font-size: 1.5rem;
     }
     &:nth-of-type(2) {
