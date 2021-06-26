@@ -302,8 +302,6 @@ main {
 #workPage .contentHeroImg {
   position: relative;
   width: 30%;
-  top: 50vh;
-  transform: translateY(-50%);
   img {
     position: relative;
     display: block;
