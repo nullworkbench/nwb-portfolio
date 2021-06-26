@@ -111,9 +111,12 @@ export default class Shape {
       tracks: [],
     }
 
+    let positionKeyframeTrackJSON
+    let scaleKeyframeTrackJSON
+
     switch (path) {
       case 'index': {
-        const positionKeyframeTrackJSON = {
+        positionKeyframeTrackJSON = {
           name: '.position',
           type: 'vector',
           times: [0, 0.8],
@@ -126,7 +129,7 @@ export default class Shape {
             0,
           ],
         }
-        const scaleKeyframeTrackJSON = {
+        scaleKeyframeTrackJSON = {
           name: '.scale',
           type: 'vector',
           times: [0, 0.8],
@@ -140,12 +143,11 @@ export default class Shape {
           ],
         }
 
-        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
         break
       }
       case 'about': {
         // 左端に移動するアニメーション
-        const positionKeyframeTrackJSON = {
+        positionKeyframeTrackJSON = {
           name: '.position', // .parseTrackName
           type: 'vector', // nameに設定したプロパティの型
           times: [0, 0.8], // 時間の区切り
@@ -159,7 +161,7 @@ export default class Shape {
           ], // 0秒の時に[0,0,0], 1秒の時に[2,1,15]
         }
         // 拡大するアニメーション
-        const scaleKeyframeTrackJSON = {
+        scaleKeyframeTrackJSON = {
           name: '.scale', // .parseTrackName
           type: 'vector', // nameに設定したプロパティの型
           times: [0, 0.8], // 時間の区切り
@@ -173,12 +175,10 @@ export default class Shape {
           ], // 0秒の時に[0,0,0], 1秒の時に[2,2,2]。元のscaleから2倍の大きさに
         }
 
-        // tracksに追加
-        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
         break
       }
       case 'works': {
-        const positionKeyframeTrackJSON = {
+        positionKeyframeTrackJSON = {
           name: '.position',
           type: 'vector',
           times: [0, 0.8],
@@ -191,7 +191,7 @@ export default class Shape {
             0,
           ],
         }
-        const scaleKeyframeTrackJSON = {
+        scaleKeyframeTrackJSON = {
           name: '.scale',
           type: 'vector',
           times: [0, 0.8],
@@ -204,12 +204,10 @@ export default class Shape {
             5,
           ],
         }
-
-        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
         break
       }
       case 'blog': {
-        const positionKeyframeTrackJSON = {
+        positionKeyframeTrackJSON = {
           name: '.position',
           type: 'vector',
           times: [0, 0.8],
@@ -222,7 +220,7 @@ export default class Shape {
             0,
           ],
         }
-        const scaleKeyframeTrackJSON = {
+        scaleKeyframeTrackJSON = {
           name: '.scale',
           type: 'vector',
           times: [0, 0.8],
@@ -236,11 +234,10 @@ export default class Shape {
           ],
         }
 
-        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
         break
       }
-      case 'contact': {
-        const positionKeyframeTrackJSON = {
+      default:
+        positionKeyframeTrackJSON = {
           name: '.position',
           type: 'vector',
           times: [0, 0.8],
@@ -253,7 +250,7 @@ export default class Shape {
             0,
           ],
         }
-        const scaleKeyframeTrackJSON = {
+        scaleKeyframeTrackJSON = {
           name: '.scale',
           type: 'vector',
           times: [0, 0.8],
@@ -267,13 +264,11 @@ export default class Shape {
           ],
         }
 
-        clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
-        break
-      }
-      default:
         break
     }
 
+    // tracksに追加
+    clipJSON.tracks.push(positionKeyframeTrackJSON, scaleKeyframeTrackJSON)
     // アニメーションの動き方を指定
     for (const track of clipJSON.tracks) {
       track.interpolation = THREE.InterpolateSmooth
