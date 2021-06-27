@@ -7,12 +7,12 @@
       </nuxt-link>
     </h1>
 
-    <div class="spMenuTrigger">
+    <div class="spMenuTrigger" @click="spMenuOpen">
       <div></div>
       <div></div>
     </div>
 
-    <ul>
+    <ul ref="globalMenu">
       <li><nuxt-link ref="about" to="/about">About</nuxt-link></li>
       <li><nuxt-link ref="works" to="/works">Works</nuxt-link></li>
       <li><nuxt-link ref="library" to="/library">Library</nuxt-link></li>
@@ -23,7 +23,23 @@
 </template>
 
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      spMenuOpened: false,
+    }
+  },
+  methods: {
+    spMenuOpen() {
+      if (this.spMenuOpened) {
+        this.$refs.globalMenu.classList.remove('show')
+      } else {
+        this.$refs.globalMenu.classList.add('show')
+      }
+      this.spMenuOpened = !this.spMenuOpened
+    },
+  },
+}
 </script>
 
 <style lang="scss" scoped>
@@ -109,7 +125,7 @@ li {
     }
   }
 
-  // メニューをアコーディオンに
+  // メニューを開くトリガー
   .spMenuTrigger {
     $spMenuTriggerWidth: 1.2rem;
 
@@ -130,8 +146,38 @@ li {
     }
   }
 
+  // メニュー
+  $easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
   ul {
-    display: none;
+    display: block;
+    width: 100vw;
+    height: 0;
+    transition: height 0.4s $easeInCubic, padding 0.4s;
+    margin-top: 3rem;
+    overflow: hidden;
+    background: #f9f9f9;
+
+    li {
+      padding: 0;
+      opacity: 0;
+      transform: translateX(-3rem);
+      transition: opacity 0.4s, transform 0.4s;
+
+      @for $i from 0 through 5 {
+        &:nth-of-type(#{$i}) {
+          transition-delay: 0.1 * $i + s;
+        }
+      }
+    }
+  }
+  ul.show {
+    height: 100vh;
+    padding: 2rem;
+
+    li {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 }
 
