@@ -90,10 +90,16 @@ export default class Shape {
 
   // 球体
   addIcosahedron() {
-    const geometry = new THREE.IcosahedronGeometry(
-      Controller.size.windowWidth * 0.15,
-      2
-    ) // 半径, 面の細かさ
+    const radius = (function () {
+      const windowWidth = Controller.size.windowWidth
+      // スマホの場合は少し大きくする
+      if (windowWidth < 600) {
+        return windowWidth * 0.35
+      } else {
+        return windowWidth * 0.15
+      }
+    })()
+    const geometry = new THREE.IcosahedronGeometry(radius, 2) // 半径, 面の細かさ
 
     this.icosahedron = new THREE.Mesh(geometry, this.material)
     this.icosahedronLine = this.appendEdgeLine(geometry)

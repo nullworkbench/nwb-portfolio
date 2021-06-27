@@ -4,6 +4,7 @@
       <h2>nullworkbench</h2>
       <p>"beginning from _"</p>
     </div>
+
     <div id="sphereContent">
       <div ref="sphereContentInner" class="inner">
         <span class="heading">{{ sphereContents[sphereContentIdx][0] }}</span>
@@ -11,6 +12,7 @@
         <p>click to continue</p>
       </div>
     </div>
+
     <nav id="sideMenu">
       <ul>
         <li
@@ -202,5 +204,33 @@ export default {
       }
     }
   }
+}
+
+/* ----- レスポンシブ ----- */
+$easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+/* スマートフォン */
+@media only screen and (max-width: 599px) {
+  #title {
+    position: relative;
+    width: 100%;
+    transform: none;
+    padding-top: 20vh;
+    text-align: center;
+
+    h2 {
+      font-size: 13vw;
+    }
+  }
+  #sideMenu {
+    position: relative;
+    width: 100%;
+    transform: none;
+    margin-top: 30vh;
+
+    // font
+    font-size: 1rem;
+  }
+} /* タブレット */
+@media only screen and (max-width: 1024px) {
 }
 </style>
