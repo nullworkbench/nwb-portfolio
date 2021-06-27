@@ -207,7 +207,6 @@ export default {
 }
 
 /* ----- レスポンシブ ----- */
-$easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 /* スマートフォン */
 @media only screen and (max-width: 599px) {
   #title {

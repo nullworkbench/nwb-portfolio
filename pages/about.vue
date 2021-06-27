@@ -12,16 +12,16 @@
           <ul class="basicInfo">
             <li>Tetta Ueyama <span class="sub">( nullworkbench )</span></li>
             <li>
-              <span class="emoji">&#x1f389;</span>Date of birth: December 7,
-              2001
+              <span class="emoji">&#x1f389;</span>Date of birth:
+              <span>December 7, 2001</span>
             </li>
             <li>
-              <span class="emoji">&#x1f393;</span>University: 専修大学
-              ネットワーク情報学部 就学中
+              <span class="emoji">&#x1f393;</span>University:
+              <span> 専修大学 ネットワーク情報学部 就学中 </span>
             </li>
             <li>
               <span class="emoji">&#x1f4e7;</span>Email:
-              nullworkbench[at]gmail.com
+              <span>nullworkbench[at]gmail.com</span>
             </li>
           </ul>
           <div>
@@ -203,6 +203,53 @@ h3 {
 
   li {
     margin-bottom: 3rem;
+  }
+}
+
+/* ----- レスポンシブ ----- */
+/* スマートフォン */
+@media only screen and (max-width: 599px) {
+  h2 {
+    position: relative;
+    left: 0;
+    transform: none;
+    padding-top: 5rem;
+    margin-bottom: 1rem;
+
+    font-size: 2.5rem;
+    text-align: center;
+  }
+
+  .mainWrapper {
+    padding: 0;
+  }
+  main {
+    width: 95%;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: #f9f9f9cb;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  #sectionProfile {
+    .basicInfo {
+      li {
+        &:nth-of-type(1) {
+          font-size: 1.5rem;
+          margin-bottom: 1.5rem;
+          span {
+            font-size: 1.3rem;
+          }
+        }
+        span {
+          display: inline-block;
+        }
+      }
+    }
   }
 }
 </style>

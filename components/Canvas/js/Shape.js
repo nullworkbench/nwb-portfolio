@@ -197,7 +197,7 @@ export default class Shape {
             this.icosahedron.position.y,
             this.icosahedron.position.z,
             0,
-            this.icosahedronInitialPos.y,
+            0,
             0,
           ],
         }
