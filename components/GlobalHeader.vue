@@ -1,21 +1,24 @@
 <template>
   <header>
-    <div>
-      <h1>
-        <nuxt-link to="/">
-          <img src="/nwb_icon.svg" alt="nullworkbenchのロゴ" />
-          <span>nullworkbench</span>
-        </nuxt-link>
-      </h1>
+    <h1>
+      <nuxt-link to="/">
+        <img src="/nwb_icon.svg" alt="nullworkbenchのロゴ" />
+        <span>nullworkbench</span>
+      </nuxt-link>
+    </h1>
 
-      <ul>
-        <li><nuxt-link ref="about" to="/about">About</nuxt-link></li>
-        <li><nuxt-link ref="works" to="/works">Works</nuxt-link></li>
-        <li><nuxt-link ref="library" to="/library">Library</nuxt-link></li>
-        <li><nuxt-link ref="blog" to="/blog">Blog</nuxt-link></li>
-        <li><nuxt-link ref="contact" to="/contact">Contact</nuxt-link></li>
-      </ul>
+    <div class="spMenuTrigger">
+      <div></div>
+      <div></div>
     </div>
+
+    <ul>
+      <li><nuxt-link ref="about" to="/about">About</nuxt-link></li>
+      <li><nuxt-link ref="works" to="/works">Works</nuxt-link></li>
+      <li><nuxt-link ref="library" to="/library">Library</nuxt-link></li>
+      <li><nuxt-link ref="blog" to="/blog">Blog</nuxt-link></li>
+      <li><nuxt-link ref="contact" to="/contact">Contact</nuxt-link></li>
+    </ul>
   </header>
 </template>
 
@@ -38,7 +41,7 @@ header {
 }
 
 h1 {
-  max-width: 13rem;
+  max-width: 15rem;
   font-size: 1.5rem;
   font-weight: 200;
 
@@ -54,6 +57,10 @@ h1 {
     display: block;
     padding-top: 0.3rem;
   }
+}
+
+.spMenuTrigger {
+  display: none;
 }
 
 ul {
@@ -79,5 +86,56 @@ li {
   .nuxt-link-active {
     font-weight: 600;
   }
+}
+
+/* ----- レスポンシブ ----- */
+/* スマートフォン */
+@media only screen and (max-width: 599px) {
+  h1 {
+    // 中央に配置
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: none;
+    // ロゴの文字削除
+    span {
+      display: none;
+    }
+    // ロゴアイコンサイズ変更
+    img {
+      width: 1.3rem;
+      margin: 0;
+    }
+  }
+
+  // メニューをアコーディオンに
+  .spMenuTrigger {
+    $spMenuTriggerWidth: 1.2rem;
+
+    display: block;
+    position: relative;
+    width: $spMenuTriggerWidth;
+    margin: auto 0 auto auto;
+    padding: 0.8rem 0;
+
+    div {
+      width: $spMenuTriggerWidth;
+      height: 1px;
+      background: #333;
+
+      &:nth-of-type(1) {
+        margin-bottom: 0.4rem;
+      }
+    }
+  }
+
+  ul {
+    display: none;
+  }
+}
+
+/* タブレット */
+@media only screen and (max-width: 1024px) {
 }
 </style>
