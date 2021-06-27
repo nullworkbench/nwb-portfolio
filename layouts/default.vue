@@ -23,6 +23,8 @@ export default {
       // _new: 遷移先パス, _old: 遷移元パス
       // 球体のアニメーションを実行
       EventBus.$emit('THREE_PATH_TRANSITION', _new)
+      // スマホ用メニューを閉じる
+      this.$refs.globalHeader.spMenuClose()
     },
   },
   mounted() {

@@ -7,7 +7,7 @@
       </nuxt-link>
     </h1>
 
-    <div ref="spMenuTrigger" class="spMenuTrigger" @click="spMenuOpen">
+    <div ref="spMenuTrigger" class="spMenuTrigger" @click="spMenuToggle">
       <div></div>
       <div></div>
     </div>
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    spMenuOpen() {
+    spMenuToggle() {
       if (this.spMenuOpened) {
         this.$refs.globalMenu.classList.remove('show')
         this.$refs.spMenuTrigger.classList.remove('show')
@@ -43,6 +43,12 @@ export default {
         this.$refs.spMenuTrigger.classList.add('show')
       }
       this.spMenuOpened = !this.spMenuOpened
+    },
+    // ページ遷移時に、layoutから開閉を制御する時用
+    spMenuClose() {
+      this.$refs.globalMenu.classList.remove('show')
+      this.$refs.spMenuTrigger.classList.remove('show')
+      this.spMenuOpened = false
     },
   },
 }
