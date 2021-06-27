@@ -1,10 +1,10 @@
 import * as THREE from 'three'
-import { Vector2 } from 'three'
+import { Vector2, Vector3 } from 'three'
 import Controller from './Controller'
 
 export default class Shape {
   constructor() {
-    this.segments = 80
+    this.icosahedronInitialPos = new Vector3(0, 0, 0)
     this.rotationSpeed = 0.001
 
     // マウス座標
@@ -90,10 +90,12 @@ export default class Shape {
 
   // 球体
   addIcosahedron() {
+    let initialY = 0
     const radius = (function () {
       const windowWidth = Controller.size.windowWidth
       // スマホの場合は少し大きくする
       if (windowWidth < 600) {
+        initialY = 20
         return windowWidth * 0.35
       } else {
         return windowWidth * 0.15
@@ -108,7 +110,9 @@ export default class Shape {
     Controller.scene.add(this.icosahedron)
     this.icosahedron.add(this.icosahedronLine)
 
-    // this.icosahedron.rotateOnAxis.x += 60
+    // レスポンシブの場合用に座標をずらす
+    this.icosahedronInitialPos.setY(initialY)
+    this.icosahedron.position.setY(this.icosahedronInitialPos.y)
   }
 
   // ページ遷移でShapeの動きを変える
@@ -131,7 +135,7 @@ export default class Shape {
             this.icosahedron.position.y,
             this.icosahedron.position.z,
             0,
-            0,
+            this.icosahedronInitialPos.y,
             0,
           ],
         }
@@ -162,7 +166,7 @@ export default class Shape {
             this.icosahedron.position.y,
             this.icosahedron.position.z,
             -Controller.size.windowWidth / 2,
-            0,
+            this.icosahedronInitialPos.y,
             0,
           ], // 0秒の時に[0,0,0], 1秒の時に[2,1,15]
         }
@@ -193,7 +197,7 @@ export default class Shape {
             this.icosahedron.position.y,
             this.icosahedron.position.z,
             0,
-            0,
+            this.icosahedronInitialPos.y,
             0,
           ],
         }
@@ -252,7 +256,7 @@ export default class Shape {
             this.icosahedron.position.y,
             this.icosahedron.position.z,
             0,
-            0,
+            this.icosahedronInitialPos.y,
             0,
           ],
         }

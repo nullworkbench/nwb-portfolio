@@ -214,23 +214,55 @@ $easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
     position: relative;
     width: 100%;
     transform: none;
-    padding-top: 20vh;
+    padding-top: 18vh;
     text-align: center;
 
     h2 {
-      font-size: 13vw;
+      font-size: 12vw;
+    }
+    p {
+      font-size: 6vw;
     }
   }
   #sideMenu {
     position: relative;
-    width: 100%;
+    width: 90%;
     transform: none;
-    margin-top: 30vh;
+    margin: 0 auto;
+    margin-top: 40vh;
 
     // font
-    font-size: 1rem;
+    font-size: 1.3rem;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      li {
+        width: 100%;
+        max-width: none;
+        margin-bottom: 1.5rem;
+      }
+      .menulink {
+        display: block;
+        width: max-content;
+        margin: 0 auto;
+        padding: 0;
+      }
+    }
   }
-} /* タブレット */
+}
+/* 縦長じゃないアス比用 */
+@media only screen and (max-height: 800px) {
+  #title {
+    padding-top: 15vh;
+  }
+  #sideMenu {
+    margin-top: 34vh;
+  }
+}
+/* タブレット */
 @media only screen and (max-width: 1024px) {
 }
 </style>
