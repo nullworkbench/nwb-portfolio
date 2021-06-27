@@ -18,6 +18,10 @@
       <li><nuxt-link ref="library" to="/library">Library</nuxt-link></li>
       <li><nuxt-link ref="blog" to="/blog">Blog</nuxt-link></li>
       <li><nuxt-link ref="contact" to="/contact">Contact</nuxt-link></li>
+      <li>
+        <p>2021 &copy; nullworkbench</p>
+        <p>Tetta Ueyama</p>
+      </li>
     </ul>
   </header>
 </template>
@@ -103,6 +107,11 @@ li {
   // activeなリンクのスタイルを変更
   .nuxt-link-active {
     font-weight: 600;
+  }
+
+  // レスポンシブメニュー用のクレジットを非表示に
+  &:last-of-type {
+    display: none;
   }
 }
 
@@ -193,6 +202,18 @@ $easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
         &:nth-of-type(#{$i}) {
           transition-delay: 0.1 * $i + s;
         }
+      }
+
+      // レスポンシブメニューのみで表示するクレジット
+      &:last-of-type {
+        display: block;
+        width: 82%;
+        position: absolute;
+        bottom: 4rem;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #575757;
+        transition-delay: 0.4s;
       }
     }
   }
