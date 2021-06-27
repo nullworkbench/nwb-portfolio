@@ -7,7 +7,7 @@
       </nuxt-link>
     </h1>
 
-    <div class="spMenuTrigger" @click="spMenuOpen">
+    <div ref="spMenuTrigger" class="spMenuTrigger" @click="spMenuOpen">
       <div></div>
       <div></div>
     </div>
@@ -33,8 +33,10 @@ export default {
     spMenuOpen() {
       if (this.spMenuOpened) {
         this.$refs.globalMenu.classList.remove('show')
+        this.$refs.spMenuTrigger.classList.remove('show')
       } else {
         this.$refs.globalMenu.classList.add('show')
+        this.$refs.spMenuTrigger.classList.add('show')
       }
       this.spMenuOpened = !this.spMenuOpened
     },
@@ -105,8 +107,12 @@ li {
 }
 
 /* ----- レスポンシブ ----- */
+$easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
 /* スマートフォン */
 @media only screen and (max-width: 599px) {
+  header {
+    height: 3rem;
+  }
   h1 {
     // 中央に配置
     position: absolute;
@@ -131,23 +137,43 @@ li {
 
     display: block;
     position: relative;
+    top: 50%;
+    transform: translateY(-50%);
     width: $spMenuTriggerWidth;
+    height: 0.6rem;
     margin: auto 0 auto auto;
-    padding: 0.8rem 0;
 
     div {
+      position: absolute;
+      right: 0;
       width: $spMenuTriggerWidth;
       height: 1px;
       background: #333;
 
+      transition: transform 0.4s $easeInCubic, top 0.2s, bottom 0.2s;
+
       &:nth-of-type(1) {
-        margin-bottom: 0.4rem;
+        top: 0;
+      }
+      &:nth-of-type(2) {
+        bottom: 0;
+      }
+    }
+
+    &.show {
+      div {
+        top: 50%;
+        &:nth-of-type(1) {
+          transform: rotateZ(45deg);
+        }
+        &:nth-of-type(2) {
+          transform: rotateZ(-45deg);
+        }
       }
     }
   }
 
   // メニュー
-  $easeInCubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
   ul {
     display: block;
     width: 100vw;
