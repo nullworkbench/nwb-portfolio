@@ -201,11 +201,13 @@ export default {
       const content = this.$refs.workPage__content
       const top =
         content.firstChild.getBoundingClientRect().top + window.pageYOffset
-
+      const maxOpacity = 0.7
       if (top > 0) {
         // containerが一番上に行くまで段々背景を濃くしていく
         content.style.background =
-          'rgba(0,0,0,' + (0.8 - top / this.workPageContentMaxTop) + ')'
+          'rgba(0,0,0,' + (maxOpacity - top / this.workPageContentMaxTop) + ')'
+      } else {
+        content.style.background = 'rgba(0,0,0,' + maxOpacity + ')'
       }
     },
   },
@@ -377,10 +379,11 @@ main {
 // バツボタン
 #workPage .closeBtn {
   position: absolute;
+  z-index: 21;
   width: 3rem;
   height: 3rem;
-  top: 8%;
-  left: 93%;
+  top: 9%;
+  right: 3%;
   &::before,
   &::after {
     content: '';
@@ -439,9 +442,10 @@ main {
   }
 
   #workPage {
+    position: fixed;
     .workPageWrapper {
       display: block;
-      width: 85%;
+      width: 100%;
       margin-top: 3rem;
     }
     .contentHeroImg {
@@ -451,6 +455,7 @@ main {
     }
     .content {
       width: 100%;
+      height: 100vh;
       position: absolute;
       top: 0;
       padding-top: 10rem;
@@ -468,7 +473,22 @@ main {
 
       // workHeroImgと.contentがかぶるのを防ぐ
       & > div {
-        padding-top: 22vh;
+        padding-left: 6vw;
+        padding-right: 6vw;
+        padding-top: 27vh;
+      }
+    }
+
+    // 画面外にはみ出てしまうので修正
+    .closeBtn {
+      $btnSize: 2rem;
+      width: $btnSize;
+      height: $btnSize;
+      right: 5%;
+
+      &::before,
+      &::after {
+        width: $btnSize;
       }
     }
   }
