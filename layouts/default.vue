@@ -91,6 +91,14 @@ html {
   min-height: 100vh;
 }
 
+/* iOS Safari用に100vhを調整 */
+@supports (-webkit-touch-callout: none) {
+  #container,
+  .container {
+    min-height: -webkit-fill-available;
+  }
+}
+
 /* ----- 共通CSS ----- */
 a {
   text-decoration: none;
