@@ -35,7 +35,6 @@ export default {
   data() {
     return {
       menus: ['About', 'Works', 'Library', 'Blog', 'Contact'],
-      showSphereContent: false,
       sphereContents: [
         ['About Me', 'All About nullworkbench.'],
         ['My Works', 'Be a Professional.'],
@@ -48,24 +47,26 @@ export default {
   },
   methods: {
     showContent(idx) {
-      this.showSphereContent = true
-      this.sphereContentIdx = idx
-      document.getElementById('sphereContent').classList.add('show')
+      if (this.$device.isDesktop) {
+        this.sphereContentIdx = idx
+        document.getElementById('sphereContent').classList.add('show')
 
-      // ホバーしているもの以外の文字色を薄くする
-      const menulinks = document.getElementsByClassName('menulink')
-      for (let i = 0; i < menulinks.length; i++) {
-        if (i !== idx) menulinks[i].style.color = '#ddd'
+        // ホバーしているもの以外の文字色を薄くする
+        const menulinks = document.getElementsByClassName('menulink')
+        for (let i = 0; i < menulinks.length; i++) {
+          if (i !== idx) menulinks[i].style.color = '#ddd'
+        }
       }
     },
     hideContent(idx) {
-      this.showSphereContent = false
-      document.getElementById('sphereContent').classList.remove('show')
+      if (this.$device.isDesktop) {
+        document.getElementById('sphereContent').classList.remove('show')
 
-      // 薄くした文字色を戻す
-      const menulinks = document.getElementsByClassName('menulink')
-      for (let i = 0; i < menulinks.length; i++) {
-        menulinks[i].style.color = '#333'
+        // 薄くした文字色を戻す
+        const menulinks = document.getElementsByClassName('menulink')
+        for (let i = 0; i < menulinks.length; i++) {
+          menulinks[i].style.color = '#333'
+        }
       }
     },
   },
