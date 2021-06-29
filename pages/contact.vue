@@ -10,7 +10,7 @@
         <p>
           お仕事のご依頼や、ご質問などのお問い合わせはメールにてお伺いいたします。
         </p>
-        <p>みなさまのお問い合わせをお待ちしております。</p>
+        <p>みなさまのお問い合わせを心よりお待ちしております。</p>
       </section>
     </main>
   </div>
@@ -37,8 +37,9 @@ h2 {
 main {
   position: absolute;
   top: 48%;
-  transform: translateY(-50%);
-  width: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
   margin: 0 auto;
   margin-top: 2rem;
   text-align: center;
