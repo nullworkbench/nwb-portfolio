@@ -103,7 +103,7 @@ export default {
         ),
       ],
       currentContentIdx: 0,
-      workPageContentRect: null,
+      workPageContentMaxTop: null,
     }
   },
   beforeDestroy() {
@@ -174,6 +174,12 @@ export default {
       // 画像位置設定
       workImg.style.top = 20 - 100 * row + '%'
       workImg.style.left = 0 - 100 * (idx % 4) + '%'
+
+      // スクロールで背景色を濃くする用に最大スクロール位置を保存
+      const rect =
+        this.$refs.workPage__content.firstChild.getBoundingClientRect()
+      const top = rect.top + window.pageYOffset
+      this.workPageContentMaxTop = top
     },
     async hideItem(idx) {
       // #workPage表示
@@ -186,16 +192,21 @@ export default {
       target.style.left = 0 + '%'
 
       // workPageスクロールリセット
-      await sleep(1)
+      await sleep(0.4)
       this.$refs.workPage__content.scrollTo(0, 0)
     },
     // レスポンシブ時のworkPageアニメーション用
     workPageBgTransition() {
-      const rect = this.$refs.workPage__content
-        .getElementsByClassName('container')[0]
-        .getBoundingClientRect()
-      const top = rect.top + window.pageYOffset
-      console.log(top)
+      // contentの上端とfirstChildの間隔を計算する
+      const content = this.$refs.workPage__content
+      const top =
+        content.firstChild.getBoundingClientRect().top + window.pageYOffset
+
+      if (top > 0) {
+        // containerが一番上に行くまで段々背景を濃くしていく
+        content.style.background =
+          'rgba(0,0,0,' + (0.8 - top / this.workPageContentMaxTop) + ')'
+      }
     },
   },
 }
@@ -453,6 +464,11 @@ main {
         height: 100vh;
         background: #000;
         opacity: 0.1;
+      }
+
+      // workHeroImgと.contentがかぶるのを防ぐ
+      & > div {
+        padding-top: 22vh;
       }
     }
   }
