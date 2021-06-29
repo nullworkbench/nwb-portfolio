@@ -87,7 +87,7 @@ main {
     max-width: 700px;
     margin: 0 auto;
     margin-bottom: 2rem;
-    padding: 2rem;
+    padding: 2rem 2rem 1.8rem 2rem;
     border-radius: 1rem;
     box-shadow: 0 0 10px #eee;
 
@@ -117,6 +117,7 @@ main {
     padding: 0.5rem;
     padding-right: 0.6rem;
     margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
   }
   .tags {
     display: inline-block;
@@ -127,6 +128,18 @@ main {
       padding: 0.5rem 1rem;
       border-radius: 0.5rem;
       margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+/* ----- レスポンシブ ----- */
+/* スマートフォン */
+@media only screen and (max-width: 599px) {
+  #sectionQiita {
+    .qiitaPost {
+      width: 90%;
+      padding: 1.5rem 1.5rem 1.4rem 1.5rem;
     }
   }
 }
