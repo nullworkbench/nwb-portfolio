@@ -103,9 +103,22 @@ export default {
         ),
       ],
       currentContentIdx: 0,
+      workPageContentRect: null,
     }
   },
+  beforeDestroy() {
+    // リッスン解除
+    this.$refs.workPage__content.removeEventListener(
+      'scroll',
+      this.workPageBgTransition
+    )
+  },
   mounted() {
+    // workPageの背景用にリッスン
+    this.$refs.workPage__content.addEventListener(
+      'scroll',
+      this.workPageBgTransition
+    )
     // this.setFilter()
     // queryでitemが指定されていれば表示する
     if (this.$route.query.wid) {
@@ -175,6 +188,14 @@ export default {
       // workPageスクロールリセット
       await sleep(1)
       this.$refs.workPage__content.scrollTo(0, 0)
+    },
+    // レスポンシブ時のworkPageアニメーション用
+    workPageBgTransition() {
+      const rect = this.$refs.workPage__content
+        .getElementsByClassName('container')[0]
+        .getBoundingClientRect()
+      const top = rect.top + window.pageYOffset
+      console.log(top)
     },
   },
 }
@@ -390,6 +411,50 @@ main {
   }
   to {
     opacity: 1;
+  }
+}
+
+/* ----- レスポンシブ ----- */
+/* スマートフォン */
+@media only screen and (max-width: 599px) {
+  h2 {
+    margin-bottom: 3rem;
+  }
+
+  #stage {
+    .item {
+      width: 50%;
+    }
+  }
+
+  #workPage {
+    .workPageWrapper {
+      display: block;
+      width: 85%;
+      margin-top: 3rem;
+    }
+    .contentHeroImg {
+      margin: 0 auto;
+      width: 50%;
+      padding-top: 2rem;
+    }
+    .content {
+      width: 100%;
+      position: absolute;
+      top: 0;
+      padding-top: 10rem;
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        opacity: 0.1;
+      }
+    }
   }
 }
 </style>
