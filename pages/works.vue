@@ -225,6 +225,10 @@ class WorkItem {
 </script>
 
 <style lang="scss" scoped>
+.container {
+  padding-bottom: 10rem;
+}
+
 h2 {
   padding-top: 8rem;
   margin-bottom: 5rem;
@@ -382,7 +386,7 @@ main {
   z-index: 21;
   width: 3rem;
   height: 3rem;
-  top: 9%;
+  top: 4rem;
   right: 3%;
   &::before,
   &::after {
@@ -440,7 +444,6 @@ main {
       width: 50%;
     }
   }
-
   #workPage {
     position: fixed;
     .workPageWrapper {
@@ -466,7 +469,7 @@ main {
         top: 0;
         left: 0;
         width: 100%;
-        height: 100vh;
+        height: 100%;
         background: #000;
         opacity: 0.1;
       }

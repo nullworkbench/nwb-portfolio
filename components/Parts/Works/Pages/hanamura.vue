@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h3>花むら</h3>
 
     <div class="basicInfo">
