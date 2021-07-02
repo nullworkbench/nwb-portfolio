@@ -442,10 +442,24 @@ main {
   #stage {
     .item {
       width: 50%;
+
+      // workImgのアニメーションを無効化
+      & > img.show {
+        animation-duration: 0s;
+      }
     }
   }
   #workPage {
     position: fixed;
+
+    &.show {
+      // workImgのアニメーションがなくなるので遅延を短く
+      .contentHeroImg,
+      .content {
+        animation-delay: 0.4s;
+      }
+    }
+
     .workPageWrapper {
       display: block;
       width: 100%;
