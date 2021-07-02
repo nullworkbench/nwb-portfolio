@@ -225,11 +225,10 @@ export default {
     }
   }
   #sideMenu {
-    position: relative;
-    width: 90%;
+    top: unset;
+    bottom: 0;
+    width: 100%;
     transform: none;
-    margin: 0 auto;
-    margin-top: 40vh;
 
     // font
     font-size: 1.3rem;
@@ -238,6 +237,7 @@ export default {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
+      margin: 0;
 
       li {
         width: 100%;
