@@ -226,7 +226,6 @@ class WorkItem {
 
 <style lang="scss" scoped>
 .container {
-  padding-bottom: 10rem;
 }
 
 h2 {
@@ -243,6 +242,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   margin-top: 2rem;
+  margin-bottom: 4rem;
   //   background: #f9f9f9a4;
 }
 
