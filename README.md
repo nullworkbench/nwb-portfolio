@@ -1,23 +1,8 @@
-# nwb-portfolio
+# nullworkbenchのポートフォリオサイト
+[nullworkbench.github.io](nullworkbench.github.io)で公開中
 
-## Build Setup
 
-```bash
-# install dependencies
-$ npm install
+# 使用技術
 
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-
-# deploy to github pages
-$ npm run deploy
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+- Next.js（基本フレームワークとして使用）
+- Three.js（ページ背景のシェイプアニメーションに使用）
