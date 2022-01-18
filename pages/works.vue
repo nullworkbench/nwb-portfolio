@@ -55,6 +55,7 @@
 <script>
 import Work from '@/components/Parts/Works/work.vue'
 import drpepperfinder from '@/components/Parts/Works/Pages/drpepperfinder.vue'
+import survivalkit from '@/components/Parts/Works/Pages/survivalkit.vue'
 import wishuponastar from '@/components/Parts/Works/Pages/wishuponastar.vue'
 import zuitei from '@/components/Parts/Works/Pages/zuitei.vue'
 import syoryu from '@/components/Parts/Works/Pages/syoryu.vue'
@@ -67,6 +68,7 @@ export default {
   components: {
     Work,
     drpepperfinder,
+    survivalkit,
     wishuponastar,
     zuitei,
     syoryu,
@@ -83,6 +85,12 @@ export default {
           'iPhoneアプリ\n「Dr. Pepper Finder」',
           '2021/04/12',
           'drpepperfinder_thumbnail.png'
+        ),
+        new WorkItem(
+          'survivalkit',
+          'Webアプリ\n「Survival Kit」',
+          '2021/08/30',
+          'survivalkit_thumbnail.png'
         ),
         new WorkItem(
           'wishuponastar',
