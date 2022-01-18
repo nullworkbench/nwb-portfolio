@@ -130,11 +130,14 @@ export default {
     )
   },
   mounted() {
-    // workPageの背景用にリッスン
-    this.$refs.workPage__content.addEventListener(
-      'scroll',
-      this.workPageBgTransition
-    )
+    // スマホなら
+    if (this.$device.isMobile) {
+      // workPageの背景用にリッスン
+      this.$refs.workPage__content.addEventListener(
+        'scroll',
+        this.workPageBgTransition
+      )
+    }
     // this.setFilter()
     // queryでitemが指定されていれば表示する
     if (this.$route.query.wid) {
