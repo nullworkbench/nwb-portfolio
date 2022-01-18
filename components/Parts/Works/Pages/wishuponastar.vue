@@ -13,6 +13,11 @@
             href="https://apps.apple.com/jp/app/%E6%98%9F%E3%81%AB%E9%A1%98%E3%81%84%E3%82%92/id1556027369"
             target="_blank"
             >App Store</a
+          >,
+          <a
+            href="https://github.com/nullworkbench/WishUponAStar"
+            target="_blank"
+            >GitHub</a
           >
         </li>
       </ul>

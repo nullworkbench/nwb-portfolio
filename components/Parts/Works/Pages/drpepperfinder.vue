@@ -13,6 +13,11 @@
             href="https://apps.apple.com/jp/app/dp-finder/id1603759636"
             target="_blank"
             >App Store</a
+          >,
+          <a
+            href="https://github.com/nullworkbench/drpepper-finder"
+            target="_blank"
+            >GitHub</a
           >
         </li>
       </ul>
