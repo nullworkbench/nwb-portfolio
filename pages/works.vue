@@ -54,6 +54,7 @@
 
 <script>
 import Work from '@/components/Parts/Works/work.vue'
+import drpepperfinder from '@/components/Parts/Works/Pages/drpepperfinder.vue'
 import wishuponastar from '@/components/Parts/Works/Pages/wishuponastar.vue'
 import zuitei from '@/components/Parts/Works/Pages/zuitei.vue'
 import syoryu from '@/components/Parts/Works/Pages/syoryu.vue'
@@ -65,6 +66,7 @@ const sleep = (sec) => new Promise((resolve) => setTimeout(resolve, sec * 1000))
 export default {
   components: {
     Work,
+    drpepperfinder,
     wishuponastar,
     zuitei,
     syoryu,
@@ -76,6 +78,12 @@ export default {
       categories: ['All', 'Frontend', 'Native App', 'Camera', 'Graphic'],
       works: [
         // ('workId','タイトル', '日付', '画像リンク（/works以下）', 'カテゴリー[]'),
+        new WorkItem(
+          'drpepperfinder',
+          'iPhoneアプリ\n「Dr. Pepper Finder」',
+          '2021/04/12',
+          'drpepperfinder_thumbnail.png'
+        ),
         new WorkItem(
           'wishuponastar',
           'iPhoneアプリ\n「星に願いを。」',
