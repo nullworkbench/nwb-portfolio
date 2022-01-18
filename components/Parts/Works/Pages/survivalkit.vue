@@ -42,7 +42,7 @@
       <p>
         また、防災グッズにはそれぞれ詳細情報を実装しており、「なぜ必要なのか」を確認できるようにすることでユーザーが納得して準備できるようにすることも意識した。
       </p>
-      <img src="/works/survivalKit/01.png" />
+      <img src="/works/survivalkit/01.png" />
     </section>
 
     <section>
