@@ -61,6 +61,7 @@ import zuitei from '@/components/Parts/Works/Pages/zuitei.vue'
 import syoryu from '@/components/Parts/Works/Pages/syoryu.vue'
 import more from '@/components/Parts/Works/Pages/more.vue'
 import hanamura from '@/components/Parts/Works/Pages/hanamura.vue'
+import fsemi from '~/components/Parts/Works/Pages/fsemi.vue'
 
 const sleep = (sec) => new Promise((resolve) => setTimeout(resolve, sec * 1000))
 
@@ -74,6 +75,7 @@ export default {
     syoryu,
     more,
     hanamura,
+    fsemi,
   },
   data() {
     return {
@@ -116,6 +118,12 @@ export default {
           '花むら様',
           '2021/05/11',
           'hanamura_thumbnail.png'
+        ),
+        new WorkItem(
+          'fsemi',
+          'フィールド演習',
+          '2022/05/04',
+          'fsemi_thumbnail.png'
         ),
       ],
       currentContentIdx: 0,
